@@ -44,6 +44,13 @@
   --active:     #cb4b16;  /* orange */
   --accent:     #dc322f;  /* red    */
 
+  /* Text column, then the apron to its right that holds notes and figures.
+     body is the sum of the three, so the block centres as a whole and the
+     text column sits left of centre. */
+  --measure: 40em;
+  --apron: 17em;
+  --apron-gap: 3em;
+
   --serif: "New Athena Unicode", "Times New Roman", Times, serif;
   --mono: "Courier New", Courier, monospace;
   /* Fallbacks for when the webfont is blocked: anything covering U+2C80. */
@@ -63,14 +70,19 @@
 }
 
 body {
-  max-width: 46em;
+  max-width: calc(var(--measure) + var(--apron-gap) + var(--apron));
   margin: 1.5em auto;
   padding: 0 1em;
   background-color: var(--bg);
   color: var(--fg);
   font-family: var(--serif);
   line-height: 1.5;
+  counter-reset: sidenote;
 }
+
+/* Everything ordinary is held to the text column; only margin notes are
+   allowed out into the apron. */
+body > * { max-width: var(--measure); }
 
 /* Must precede any rule that sizes Coptic text, so that rule wins. */
 .copt { font-family: var(--copt); font-size: 1.15em; }
@@ -167,7 +179,73 @@ figure img { display: block; }
 
 figcaption { margin-top: 0.6em; font-size: 0.9em; }
 
-.cover { max-width: 21em; margin-inline: auto; }
+/* --- margin notes -------------------------------------------------------
+   Floated right and then pushed the full width of the apron plus its gutter,
+   so the note clears the text column and lines up with the paragraph that
+   introduced it. `clear: right` keeps consecutive notes from stacking on top
+   of one another. */
+
+.marginnote,
+.sidenote {
+  float: right;
+  clear: right;
+  width: var(--apron);
+  margin: 0.3em calc(-1 * (var(--apron) + var(--apron-gap))) 1.2em 0;
+  font-size: 0.85em;
+  line-height: 1.45;
+}
+
+figure.marginnote { margin-top: 0.4em; }
+
+figure.marginnote img { width: 100%; }
+
+/* Citations are numbered by a counter rather than by hand, so inserting one
+   mid-draft does not mean renumbering the rest. The marker increments it and
+   the note that follows reads the same value without incrementing again. */
+
+.noteref::after {
+  counter-increment: sidenote;
+  content: counter(sidenote);
+  font-size: 0.7em;
+  vertical-align: super;
+  line-height: 0;
+  color: var(--link);
+}
+
+.sidenote::before {
+  content: counter(sidenote) " ";
+  font-size: 0.7em;
+  vertical-align: super;
+  line-height: 0;
+  color: var(--link);
+}
+
+/* Below this there is no room for an apron, so notes rejoin the text as
+   set-off blocks. */
+@media (max-width: 66em) {
+  .marginnote,
+  .sidenote {
+    /* display:block matters — these are spans, and left inline they run on
+       inside the sentence that referenced them. */
+    display: block;
+    float: none;
+    clear: none;
+    width: auto;
+    max-width: 30em;
+    margin: 1em 0 1.2em 1.5em;
+    padding-left: 1em;
+    border-left: 2px solid var(--border);
+  }
+
+  /* A figure is already set apart by being an image; the rule just crowds it. */
+  figure.marginnote {
+    margin-left: 0;
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  figure.marginnote img { width: auto; max-width: 18em; }
+}
 
 /* --- footer ------------------------------------------------------------ */
 

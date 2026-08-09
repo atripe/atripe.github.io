@@ -71,11 +71,34 @@ repo = "https://github.com/atripe/some-repo"   # optional
 
 Projects have no dates and no tags; `weight` sets the order.
 
-For Coptic, use the shortcode so the text picks up the font stack:
+## Shortcodes
 
 ```
-{{/* copt(t="ⲃ ⲗ ⲙ ⲛ ⲣ") */}}
+{{/* copt(t="ⲃ ⲗ ⲙ ⲛ ⲣ") */}}                     Coptic, in the font stack
+{{/* cite(t="Crum, <em>A Coptic Dictionary</em> (Oxford, 1939), 168a.") */}}
+{{/* margin(t="An aside, unnumbered.") */}}
 ```
+
+`cite` puts a superscript marker in the text and the reference in the right
+margin. Numbering is a CSS counter, so inserting one mid-draft renumbers the
+rest for free. `margin` is the same thing without a number. Both take HTML
+in `t`, which is how you get italics into a title.
+
+A figure goes in the margin by carrying the class directly:
+
+```html
+<figure class="marginnote">
+  <img src="thing.png" width="801" height="1068" alt="Thing">
+</figure>
+```
+
+Notes are floats with `clear: right`, so each one waits for the previous to
+finish. A tall margin figure therefore pushes the notes after it down the
+page, away from the paragraph that cited them. That is the cost of doing
+this without JavaScript; keep margin figures short if it bothers you.
+
+Below 66em there is no room for the margin, and notes fall back to indented
+blocks in the text.
 
 ## Design
 
