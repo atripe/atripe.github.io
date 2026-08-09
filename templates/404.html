@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}Not found — {{ config.title }}{% endblock %}
+{% block title %}File not found — {{ config.title }}{% endblock %}
 
 {% block content %}
-<h2>Not found</h2>
+<h2>404 &mdash; File not found</h2>
 
-<p><a href="{{ get_url(path='@/_index.md') }}">Home</a></p>
+<p>Like most of the White Monastery library, this page is somewhere else.</p>
+<p>Unlike the library, it probably never existed.</p>
 {% endblock %}
