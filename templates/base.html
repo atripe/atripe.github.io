@@ -4,9 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% block title %}{{ config.title }}{% endblock %}</title>
-<meta name="description" content="{% block description %}{{ config.description }}{% endblock %}">
-<meta name="keywords" content="Coptic, Sahidic, Bohairic, Shenoute, papyrology, manuscripts, Unicode">
-<meta name="author" content="{{ config.extra.author }}">
+{% if config.description %}<meta name="description" content="{% block description %}{{ config.description }}{% endblock %}">{% endif %}
+{% if config.extra.author %}<meta name="author" content="{{ config.extra.author }}">{% endif %}
 <link rel="preload" href="{{ get_url(path='fonts/newathu5_8.woff') }}" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="{{ get_url(path='style.css', cachebust=true) }}">
 <link rel="icon" href="{{ get_url(path='favicon.svg') }}" type="image/svg+xml">
@@ -15,11 +14,10 @@
 <body>
 
 <header class="masthead">
-  {# aria-label carries the Latin name, which is no longer set anywhere on
-     screen — screen readers announce "Atripe" rather than spelling out the
-     Coptic glyphs, which most voices cannot pronounce. #}
+  {# aria-label: the name is not set in Latin anywhere on screen, and most
+     screen reader voices cannot pronounce the Coptic glyphs. #}
   <p><a href="{{ get_url(path='@/_index.md') }}" aria-label="Atripe"><span class="wordmark copt">ⲁⲧⲣⲓⲡⲉ</span></a></p>
-  <p class="tagline">{{ config.extra.subtitle }}</p>
+  {% if config.extra.subtitle %}<p class="tagline">{{ config.extra.subtitle }}</p>{% endif %}
 </header>
 
 <hr>
@@ -36,25 +34,14 @@
 {% block content %}{% endblock %}
 </main>
 
-<hr>
-
-<nav class="elsewhere">
-<p>Other Coptic pages:
-{% for site in config.extra.elsewhere %}<a href="{{ site.url }}">{{ site.name }}</a>{% if not loop.last %} | {% endif %}{% endfor %}</p>
-<p><a href="{{ get_url(path='@/_index.md') }}">Back to the top page</a></p>
-</nav>
-
+{% if config.extra.email or config.extra.github %}
 <hr>
 
 <address>
-This page is maintained by {{ config.extra.author }}.<br>
-Corrections, references and offprints are welcome:
-{{ config.extra.email }}<br>
-Source and code: <a href="{{ config.extra.github }}">github.com/atripe</a><br>
-Last modified: {{ now() | date(format='%-d %B %Y') }}.<br>
-Best viewed with any browser. This page uses no scripts and sets no cookies.<br>
-Text is CC BY-SA 4.0 unless a page says otherwise.
+{% if config.extra.email %}{{ config.extra.email }}<br>{% endif %}
+{% if config.extra.github %}<a href="{{ config.extra.github }}">{{ config.extra.github | replace(from='https://', to='') }}</a>{% endif %}
 </address>
+{% endif %}
 
 </body>
 </html>

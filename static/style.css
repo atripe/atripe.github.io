@@ -1,15 +1,5 @@
-/* ------------------------------------------------------------------
-   Atripe — a plain text page that happens to be on the web.
-
-   Solarized (Ethan Schoonover), light or dark as the browser asks.
-   Nothing here invents a layout: it sets colour, a reading measure, and
-   the type the browser would have reached for anyway. Everything else is
-   the default rendering of ordinary HTML.
-   ------------------------------------------------------------------ */
-
-/* New Athena Unicode (Society for Classical Studies), SIL OFL 1.1 — see
-   fonts/OFL.txt. Served from this origin, never from a font CDN. `local()`
-   comes first so anyone who already has it installed downloads nothing. */
+/* Solarized, light or dark per prefers-color-scheme.
+   New Athena Unicode, SIL OFL 1.1 — see fonts/OFL.txt. */
 
 @font-face {
   font-family: "New Athena Unicode";
@@ -48,17 +38,15 @@
   --rule:       #eee8d5;  /* base2  */
   --border:     #93a1a1;  /* base1  */
 
-  /* Accents are the same in both modes — that is the point of Solarized. */
+  /* Accents are identical in both schemes, by Solarized's design. */
   --link:       #268bd2;  /* blue   */
   --visited:    #6c71c4;  /* violet */
   --active:     #cb4b16;  /* orange */
   --accent:     #dc322f;  /* red    */
 
-  /* New Athena Unicode covers Latin, polytonic Greek and both Coptic
-     ranges in one face, which is the whole reason for choosing it. */
   --serif: "New Athena Unicode", "Times New Roman", Times, serif;
   --mono: "Courier New", Courier, monospace;
-  /* If the webfont is blocked, fall through to whatever else has U+2C80. */
+  /* Fallbacks for when the webfont is blocked: anything covering U+2C80. */
   --copt: "New Athena Unicode", "Antinoou", "Noto Sans Coptic",
           "Segoe UI Historic", "Sophia Nubian", "FreeSerif", serif;
 }
@@ -84,8 +72,7 @@ body {
   line-height: 1.5;
 }
 
-/* Defined before anything that sizes Coptic text, so a rule that wants a
-   specific size (the masthead) wins over this utility's 1.15em. */
+/* Must precede any rule that sizes Coptic text, so that rule wins. */
 .copt { font-family: var(--copt); font-size: 1.15em; }
 
 /* --- links ---------------------------------------------------------- */
@@ -102,16 +89,8 @@ a:active  { color: var(--active); }
 .masthead { text-align: center; }
 .masthead p { margin: 0.15em 0; }
 
-/* The wordmark takes base01/base1 rather than one of the accents. Solarized's
-   accents are deliberately equiluminant, so every one of them lands between
-   3:1 and 4.3:1 against the two backgrounds — passable at display size, but
-   fixed, which would leave the masthead the one element that ignores the
-   colour scheme. base01/base1 is the palette's "emphasized content" role: it
-   flips with the scheme and clears AA comfortably in both.
-
-   Written per state because a bare `.masthead a` rule outranks a:hover and
-   a:visited and silently kills both. Hover adds an underline rather than
-   shifting hue, so the cue does not rest on colour alone. */
+/* Per state: a bare `.masthead a` rule outranks a:hover and a:visited and
+   silently kills both. */
 .masthead a:link,
 .masthead a:visited { color: var(--fg-strong); text-decoration: none; }
 
@@ -188,9 +167,6 @@ figure img { display: block; }
 
 figcaption { margin-top: 0.6em; font-size: 0.9em; }
 
-/* Cover art, not a diagram: centred, and held well short of the measure so
-   a portrait plate does not swamp the page it introduces. The artwork is
-   white on black in both schemes — it is a record sleeve, not chrome. */
 .cover { max-width: 21em; margin-inline: auto; }
 
 /* --- footer ------------------------------------------------------------ */

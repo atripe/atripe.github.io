@@ -1,36 +1,19 @@
 base_url = "https://atripe.github.io"
 title = "Atripe"
-description = "Tools for reading, typing and finding Coptic — and a list of links worth keeping."
+description = ""
 default_language = "en"
 
 compile_sass = false
 build_search_index = false
-# No feed: this is a portfolio, not a blog.
 generate_feeds = false
 
 [markdown]
 smart_punctuation = true
 bottom_footnotes = true
-# Syntax highlighting is left off (the default). It works by writing inline
-# styles, which would sit outside the stylesheet and ignore the dark mode.
+# Highlighting stays off: it emits inline styles, which ignore the dark mode.
 
 [extra]
 subtitle = "Coptic in the cloud"
-author = "the Atripe desk"
-# Written out longhand so the address harvesters have to work for it.
-email = "atripe (at) example (dot) org"
+author = ""
+email = ""
 github = "https://github.com/atripe"
-
-# Rendered as a single line in the page footer. Keep it short; the Links
-# page is where the full list lives.
-[[extra.elsewhere]]
-name = "Coptic Scriptorium"
-url = "https://copticscriptorium.org"
-
-[[extra.elsewhere]]
-name = "Coptic Dictionary Online"
-url = "https://coptic-dictionary.org"
-
-[[extra.elsewhere]]
-name = "PAThs"
-url = "https://atlas.paths-erc.eu"

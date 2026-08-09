@@ -1,19 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}File not found — {{ config.title }}{% endblock %}
+{% block title %}Not found — {{ config.title }}{% endblock %}
 
 {% block content %}
-<h2>404 &mdash; File not found</h2>
+<h2>Not found</h2>
 
-<p>
-Like most of the White Monastery library, this page is somewhere else.
-Unlike the library, it probably never existed. I reorganise these files
-from time to time and do not always leave a forwarding address.
-</p>
-
-<p>
-Try the <a href="{{ get_url(path='@/_index.md') }}">list of projects</a>,
-the <a href="{{ get_url(path='@/links/_index.md') }}">links</a>,
-or the <a href="{{ get_url(path='@/about/_index.md') }}">colophon</a>.
-</p>
+<p><a href="{{ get_url(path='@/_index.md') }}">Home</a></p>
 {% endblock %}
