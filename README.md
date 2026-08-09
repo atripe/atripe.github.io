@@ -25,6 +25,7 @@ zola check       # validate links (some external hosts false-positive)
 config.toml               site settings; author, email, footer links under [extra]
 content/_index.md         front page, and the section the projects belong to
 content/<project>.md      one project, served at /<project>/
+content/<project>/        same, when it has assets: index.md plus its images
 content/about/_index.md   colophon
 content/links/_index.md   the links page
 templates/                Tera templates; base.html holds the page furniture
@@ -34,11 +35,18 @@ static/fonts/             New Athena Unicode (WOFF) + its licence
 flake.nix                 dev shell + a derivation that builds the site
 ```
 
-Projects live at the root — `/coptic-keyboard/`, not `/projects/coptic-keyboard/`.
-That works because `about` and `links` are *sections* (directories with an
-`_index.md`), so the root section's page list contains only the projects.
-Adding a top-level `.md` file adds a project; adding a directory with an
-`_index.md` adds a page that stays out of the list.
+Projects live at the root — `/word-division/`, not `/projects/word-division/`.
+That works because `about` and `links` are *sections*, and a section's own
+pages do not appear in its parent's list. The underscore is the whole rule:
+
+| Path | Zola calls it | In the project list? |
+|---|---|---|
+| `content/thing.md` | a page | yes |
+| `content/thing/index.md` | a page bundle — colocate its images | yes |
+| `content/thing/_index.md` | a section | no |
+
+Use a bundle when a project has assets: put the images next to `index.md`
+and reference them by bare filename, as `word-division` does.
 
 ## Adding a project
 
@@ -48,10 +56,7 @@ Create `content/<slug>.md`:
 +++
 title = "Project name"
 description = "One line; it appears under the title in the list."
-date = 2026-08-09          # last worked on; also sorts the list
-
-[taxonomies]
-tags = ["tools"]
+weight = 20                # ordering only — lower sorts first
 
 [extra]
 status = "Working. Linux and Windows; macOS is untested."
@@ -59,9 +64,12 @@ repo = "https://github.com/atripe/some-repo"   # optional
 +++
 ```
 
-`status` is optional and shows on both the list and the project page. Be
-honest in it — it is the most useful line on the page. `repo` is optional
-too and renders as a link on the project page only.
+Projects carry no dates and no tags, by design: a portfolio is a shelf, not
+a timeline, and a dated project page invites the reader to wonder whether it
+has been abandoned. `weight` decides the order and nothing else. Say what
+you mean about currency in `status` instead — it is the most useful line on
+the page, so be honest in it. `repo` is optional and renders only on the
+project page.
 
 For Coptic, use the shortcode rather than typing the letters bare:
 

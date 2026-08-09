@@ -1,6 +1,6 @@
 +++
 title = "Welcome"
-sort_by = "date"
+sort_by = "weight"
 template = "index.html"
 +++
 

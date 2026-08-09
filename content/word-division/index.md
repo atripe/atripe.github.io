@@ -1,14 +1,25 @@
 +++
 title = "Word division"
 description = "Segmenting Sahidic written without spaces, and writing down the conventions that decide where the breaks go."
-date = 2026-08-09
-
-[taxonomies]
-tags = ["orthography", "sahidic", "tools"]
+weight = 10
 
 [extra]
 status = "Early. The conventions document is further along than the code."
 +++
+
+<figure class="cover">
+  <img src="word-division.png" width="801" height="1068"
+       alt="A stacked plot of successive radio pulses, drawn as white contour
+            lines on black, under the title WORD DIVISION.">
+  <figcaption>
+    With apologies to Peter Saville. The original is a stack of successive
+    radio pulses from CP 1919, the first pulsar found, drawn by Harold Craft
+    for his 1970 Cornell thesis and reprinted in the <em>Cambridge
+    Encyclopaedia of Astronomy</em> some years before Factory Records put it
+    on a record sleeve. It is the right picture for this: a continuous
+    signal, cut into units, stacked so that the units line up.
+  </figcaption>
+</figure>
 
 Coptic manuscripts are written *scriptio continua* — letters run on without
 spaces, and the reader is expected to know where one word stops. Every

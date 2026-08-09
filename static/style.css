@@ -180,6 +180,19 @@ th { background-color: var(--bg-alt); }
 
 img { max-width: 100%; height: auto; }
 
+/* --- figures ------------------------------------------------------------ */
+
+figure { margin: 1.5em 0 1.8em; }
+
+figure img { display: block; }
+
+figcaption { margin-top: 0.6em; font-size: 0.9em; }
+
+/* Cover art, not a diagram: centred, and held well short of the measure so
+   a portrait plate does not swamp the page it introduces. The artwork is
+   white on black in both schemes — it is a record sleeve, not chrome. */
+.cover { max-width: 21em; margin-inline: auto; }
+
 /* --- footer ------------------------------------------------------------ */
 
 address { font-size: 0.9em; }

@@ -6,20 +6,21 @@
 {% block content %}
 <h2>{{ page.title }}</h2>
 
+{% if page.extra.status or page.extra.repo %}
 <p class="meta">
-  {% if page.extra.status %}<strong>Status:</strong> {{ page.extra.status }}<br>{% endif %}
-  {% if page.extra.repo %}<strong>Repository:</strong> <a href="{{ page.extra.repo }}">{{ page.extra.repo | replace(from='https://', to='') }}</a><br>{% endif %}
-  {% if page.date %}Last worked on {{ page.date | date(format='%-d %B %Y') }}.{% endif %}
-  {% if page.taxonomies.tags %}
-  Filed under {% for tag in page.taxonomies.tags %}<a href="{{ get_taxonomy_url(kind='tags', name=tag) }}">{{ tag }}</a>{% if not loop.last %}, {% endif %}{% endfor %}.{% endif %}
+  {% if page.extra.status %}<strong>Status:</strong> {{ page.extra.status }}{% endif %}
+  {% if page.extra.repo %}{% if page.extra.status %}<br>{% endif %}<strong>Repository:</strong> <a href="{{ page.extra.repo }}">{{ page.extra.repo | replace(from='https://', to='') }}</a>{% endif %}
 </p>
+{% endif %}
 
 {{ page.content | safe }}
 
-{% if page.higher or page.lower %}
+{# Projects are ordered by weight, so there is no "newer" or "older" — just
+   the neighbours on either side. Only render what exists. #}
+{% if page.lower or page.higher %}
 <p class="meta">
-[ {% if page.lower %}<a href="{{ page.lower.permalink }}">{{ page.lower.title }}</a>{% else %}Most recent project{% endif %}
-| {% if page.higher %}<a href="{{ page.higher.permalink }}">{{ page.higher.title }}</a>{% else %}Earliest project{% endif %} ]
+[ {% if page.lower %}<a href="{{ page.lower.permalink }}">{{ page.lower.title }}</a>{% endif %}{% if page.lower and page.higher %}
+| {% endif %}{% if page.higher %}<a href="{{ page.higher.permalink }}">{{ page.higher.title }}</a>{% endif %} ]
 </p>
 {% endif %}
 {% endblock %}
