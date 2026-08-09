@@ -4,27 +4,22 @@
 {% block description %}{{ page.description | default(value=config.description) }}{% endblock %}
 
 {% block content %}
-<article class="prose">
-  <h1>{{ page.title }}</h1>
+<h2>{{ page.title }}</h2>
 
-  {% if page.date %}
-  <p class="byline">
-    <time datetime="{{ page.date }}">{{ page.date | date(format='%e %B %Y') }}</time>
-    {% if page.taxonomies.tags %}
-    <span class="byline-sep">·</span>
-    {% for tag in page.taxonomies.tags %}<a class="tag" href="{{ get_taxonomy_url(kind='tags', name=tag) }}">{{ tag }}</a>{% endfor %}
-    {% endif %}
-    {% if page.reading_time %}<span class="byline-sep">·</span>{{ page.reading_time }} min{% endif %}
-  </p>
-  {% endif %}
+<p class="meta">
+  {% if page.extra.status %}<strong>Status:</strong> {{ page.extra.status }}<br>{% endif %}
+  {% if page.extra.repo %}<strong>Repository:</strong> <a href="{{ page.extra.repo }}">{{ page.extra.repo | replace(from='https://', to='') }}</a><br>{% endif %}
+  {% if page.date %}Last worked on {{ page.date | date(format='%-d %B %Y') }}.{% endif %}
+  {% if page.taxonomies.tags %}
+  Filed under {% for tag in page.taxonomies.tags %}<a href="{{ get_taxonomy_url(kind='tags', name=tag) }}">{{ tag }}</a>{% if not loop.last %}, {% endif %}{% endfor %}.{% endif %}
+</p>
 
-  {{ page.content | safe }}
-</article>
+{{ page.content | safe }}
 
 {% if page.higher or page.lower %}
-<nav class="pager" aria-label="Notes">
-  {% if page.lower %}<a class="pager-next" href="{{ page.lower.permalink }}">&laquo; Newer: {{ page.lower.title }}</a>{% endif %}
-  {% if page.higher %}<a class="pager-prev" href="{{ page.higher.permalink }}">Older: {{ page.higher.title }} &raquo;</a>{% endif %}
-</nav>
+<p class="meta">
+[ {% if page.lower %}<a href="{{ page.lower.permalink }}">{{ page.lower.title }}</a>{% else %}Most recent project{% endif %}
+| {% if page.higher %}<a href="{{ page.higher.permalink }}">{{ page.higher.title }}</a>{% else %}Earliest project{% endif %} ]
+</p>
 {% endif %}
 {% endblock %}

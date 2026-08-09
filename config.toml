@@ -1,33 +1,31 @@
 base_url = "https://atripe.github.io"
-title = "atripe"
-description = "A small portal for Coptic — notes, orthography, manuscripts, and links worth keeping."
+title = "Atripe"
+description = "Tools for reading, typing and finding Coptic — and a list of links worth keeping."
 default_language = "en"
 
 compile_sass = false
 build_search_index = false
-generate_feeds = true
-feed_filenames = ["atom.xml"]
+# No feed: this is a portfolio, not a blog.
+generate_feeds = false
 
 [markdown]
 smart_punctuation = true
 bottom_footnotes = true
-
-[markdown.highlighting]
-enabled = true
-theme = "solarized-light"
+# Syntax highlighting is left off (the default). It works by writing inline
+# styles, which would sit outside the stylesheet and ignore the dark mode.
 
 [[taxonomies]]
 name = "tags"
-feed = true
 
 [extra]
-subtitle = "notes from a desk piled with Sahidic"
-author = "the atripe desk"
-# Purely decorative. Bump it when you feel the site deserves it.
-counter = ["0", "0", "0", "1", "4", "5", "9"]
-guestbook = "https://github.com/atripe/atripe.github.io/issues"
-# Small outbound list rendered in the sidebar. Keep it short; the Links page is
-# where the full portal lives.
+subtitle = "Coptic in the cloud"
+author = "the Atripe desk"
+# Written out longhand so the address harvesters have to work for it.
+email = "atripe (at) example (dot) org"
+github = "https://github.com/atripe"
+
+# Rendered as a single line in the page footer. Keep it short; the Links
+# page is where the full list lives.
 [[extra.elsewhere]]
 name = "Coptic Scriptorium"
 url = "https://copticscriptorium.org"
@@ -37,5 +35,5 @@ name = "Coptic Dictionary Online"
 url = "https://coptic-dictionary.org"
 
 [[extra.elsewhere]]
-name = "PAThs atlas"
+name = "PAThs"
 url = "https://atlas.paths-erc.eu"

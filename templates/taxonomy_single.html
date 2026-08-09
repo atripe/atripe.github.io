@@ -3,10 +3,10 @@
 {% block title %}{{ term.name }} — {{ config.title }}{% endblock %}
 
 {% block content %}
-<article class="prose">
-  <h1>Tagged &ldquo;{{ term.name }}&rdquo;</h1>
-  {% set notes = term %}
-  {% include "_postlist.html" %}
-  <p class="more"><a href="{{ get_url(path='@/notes/_index.md') }}">All notes &rarr;</a></p>
-</article>
+<h2>Filed under &ldquo;{{ term.name }}&rdquo;</h2>
+
+{% set projects = term %}
+{% include "_projectlist.html" %}
+
+<p><a href="{{ get_url(path='@/_index.md') }}">All projects</a></p>
 {% endblock %}

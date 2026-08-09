@@ -6,7 +6,7 @@ sort_by = "none"
 +++
 
 Kept by hand, checked when something breaks. If a link here has rotted,
-say so — the address is on the [colophon](@/about.md).
+say so — the address is at the foot of every page.
 
 ## Dictionaries
 
@@ -33,5 +33,8 @@ say so — the address is on the [colophon](@/about.md).
 
 ## Type
 
-- [Antinoou and friends](https://www.evertype.com/fonts/coptic/) — the
-  fonts discussed in [that note](@/notes/fonts-that-render-coptic.md).
+- [Antinoou and friends](https://www.evertype.com/fonts/coptic/) — Michael
+  Everson's Coptic faces. Antinoou is the reference face for epigraphy and
+  papyrology.
+- [New Athena Unicode](https://apagreekkeys.org/NAUdownload.html) — the
+  Society for Classical Studies' face, which this page is set in.

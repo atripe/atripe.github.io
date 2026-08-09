@@ -4,13 +4,7 @@
 {% block description %}{{ section.description | default(value=config.description) }}{% endblock %}
 
 {% block content %}
-<article class="prose">
-  <h1>{{ section.title }}</h1>
-  {{ section.content | safe }}
+<h2>{{ section.title }}</h2>
 
-  {% if section.pages %}
-  {% set notes = section %}
-  {% include "_postlist.html" %}
-  {% endif %}
-</article>
+{{ section.content | safe }}
 {% endblock %}

@@ -1,0 +1,10 @@
+{# Expects `projects` — a section (or taxonomy term) whose pages are projects. #}
+<dl>
+{% for page in projects.pages %}
+  <dt><a href="{{ page.permalink }}">{{ page.title }}</a></dt>
+  <dd>
+    {% if page.description %}{{ page.description }}{% endif %}
+    {% if page.extra.status %}<br><span class="meta">Status: {{ page.extra.status }}</span>{% endif %}
+  </dd>
+{% endfor %}
+</dl>
