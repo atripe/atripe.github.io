@@ -1,5 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" fill="#e3d9bf"/>
-  <rect x="0.5" y="0.5" width="31" height="31" fill="none" stroke="#9c7434"/>
-  <text x="16" y="24" font-family="Georgia, serif" font-size="24" text-anchor="middle" fill="#a32a1c">&#11393;</text>
+  <style>
+    /* Solarized, following the same scheme preference as the page. */
+    .bg { fill: #fdf6e3; }  /* base3  */
+    .fg { fill: #586e75; }  /* base01 */
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #002b36; }  /* base03 */
+      .fg { fill: #93a1a1; }  /* base1  */
+    }
+  </style>
+  <rect class="bg" width="32" height="32"/>
+  <text class="fg" x="16" y="25" font-family="serif" font-size="27" text-anchor="middle">&#11393;</text>
 </svg>
