@@ -24,16 +24,26 @@
           # and the pages are set from the same file.
           coptic-font = pkgs.runCommand "new-athena-unicode-ttf" {
             nativeBuildInputs = [ (pkgs.python3.withPackages (ps: [ ps.fonttools ])) ];
-            woff = ./static/fonts/newathu5_8.woff;
+            # All three faces, not only the regular. Given one face Typst
+            # synthesises the others, and faux bold on Coptic at 8pt fills in
+            # the counters; the sheet leans on real bold to stay scannable.
+            woffs = [
+              ./static/fonts/newathu5_8.woff
+              ./static/fonts/newathuBold5_8.woff
+              ./static/fonts/newathuItalic5_8.woff
+            ];
           } ''
             mkdir -p $out
-            python3 -c '
-            import os
+            for woff in $woffs; do
+              python3 -c '
+            import os, sys
             from fontTools.ttLib import TTFont
-            font = TTFont(os.environ["woff"])
+            font = TTFont(sys.argv[1])
             font.flavor = None
-            font.save(os.path.join(os.environ["out"], "NewAthenaUnicode.ttf"))
-            '
+            name = os.path.basename(sys.argv[1]).replace(".woff", ".ttf")
+            font.save(os.path.join(os.environ["out"], name))
+            ' "$woff"
+            done
           '';
 
           cheatsheet = pkgs.stdenvNoCC.mkDerivation {

@@ -81,48 +81,48 @@
 
 #group[Determiners §§1–5]
 
-#rule(1)[Definite article, all forms: joined.]
+#rule(1)[Definite article, all forms: *joined*.]
 #ex[#cop[ⲡϣⲏⲣⲉ] #gl[the son] · #cop[ⲧⲉⲣⲟⲙⲡⲉ] #gl[the year]]
 
-#rule(2)[Indefinite #cop[ⲟⲩ], #cop[ϩⲉⲛ]: joined. Also separates the article
+#rule(2)[Indefinite #cop[ⲟⲩ], #cop[ϩⲉⲛ]: *joined*. Also separates the article
 from interrogative #cop[ⲟⲩ] #gl[what?]]
 #ex[#cop[ⲟⲩⲱⲃ] #gl[a thing] · #cop[ⲟⲩ ⲡⲉ ⲡⲁⲓ] #gl[what is this?]]
 
-#rule(3)[Plural #cop[ϩⲉⲛ] joined, so the preposition #cop[ϩⲛ] stays visible.]
+#rule(3)[Plural #cop[ϩⲉⲛ] *joined*, so the preposition #cop[ϩⲛ] stays visible.]
 #ex[#cop[ϩⲉⲛϣⲁϫⲉ ⲁⲛ] #gl[not words] · #cop[ϩⲛ ϣⲁϫⲉ ⲁⲛ] #gl[not in words]]
 
-#rule(4)[Demonstrative article joined, demonstrative pronoun separate.
+#rule(4)[Demonstrative article *joined*, demonstrative pronoun *separate*.
 Indispensable in A, A#sub[2], F and B, where the two are spelt alike.]
 #ex[#cop[ⲡⲉⲓⲣⲱⲙⲉ] #gl[this man] · #cop[ⲡⲉⲓ ⲟⲩⲣⲱⲙⲉ ⲡⲉ] #gl[this is a man]]
 
-#rule(5)[Possessive article joined, possessive prefix separate. Without this
+#rule(5)[Possessive article *joined*, possessive prefix *separate*. Without this
 the article + #cop[ⲁⲧ-] #gl[without] reads as its own opposite.]
 #ex[#cop[ⲛⲁⲉⲓⲟⲧⲉ] #gl[my parents] · #cop[ⲛⲁ ⲛⲁⲉⲓⲟⲧⲉ] #gl[those of my parents]]
 #ex[#cop[ⲡⲁⲧⲙⲟⲣⲧ] #gl[the beardless one] · #cop[ⲡⲁ ⲧⲙⲟⲣⲧ] #gl[the bearded one]]
 
 #group[Conjugation and subject §§6–12]
 
-#rule(6)[Conjugation prefix with pronominal subject: joined to the predicate,
+#rule(6)[Conjugation prefix with pronominal subject: *joined* to the predicate,
 as a personal ending is elsewhere — #gl[amavit], not #gl[ama v it].]
 #ex[#cop[ⲁϥⲛⲁⲩ] #gl[he saw] · #cop[ⲛⲉϥϩⲟⲟⲩ] #gl[it was bad]]
 
 #rule(7)[The same before a non-verbal predicate.]
 #ex[#cop[ϥⲙⲙⲁⲩ] #gl[he is there] · #cop[ⲛⲉϥϩⲙ ⲡⲉϥⲏⲓ] #gl[he was in his house]]
 
-#rule(8)[A nominal subject is separated from its predicate.]
+#rule(8)[A nominal subject is *separated* from its predicate.]
 #ex[#cop[ⲡⲁⲥⲟⲛ ϩⲙ ⲡⲉϥⲏⲓ] #gl[my brother is in his house]]
 
-#rule(9)[But the conjugation prefix is joined to a nominal subject. This is
+#rule(9)[But the conjugation prefix is *joined* to a nominal subject. This is
 the distinction that carries the most weight in the whole system.]
 #ex[#cop[ⲙⲉⲣⲉⲡϫⲟⲉⲓⲥ ⲥⲙⲟⲩ] #gl[the Lord does not bless]]
 #ex[#cop[ⲙⲉⲣⲉ ⲡϫⲟⲉⲓⲥ ⲥⲙⲟⲩ] #gl[love the Lord! bless\u{2026}]]
 
-#rule(10)[Conjunctive #cop[ⲛⲧⲉ] with nominal subject joined; the preposition
-#cop[ⲛⲧⲉ] separate.]
+#rule(10)[Conjunctive #cop[ⲛⲧⲉ] with nominal subject *joined*; the preposition
+#cop[ⲛⲧⲉ] *separate*.]
 #ex[#cop[ⲛⲧⲉⲡϫⲟⲉⲓⲥ] #gl[and the Lord will] · #cop[ⲛⲧⲉ ⲡϫⲟⲉⲓⲥ] #gl[from the Lord]]
 
 #rule(11)[Suffix conjugation: #emph[not] joined to a following nominal
-subject. Separation is plainer here, not less plain.]
+subject. *Separation* is plainer here, not less plain.]
 #ex[#cop[ⲡⲉϫⲉ ⲡϫⲟⲉⲓⲥ] #gl[the Lord said] · #cop[ⲛⲁⲛⲟⲩ ⲡⲉⲕⲛⲁ] #gl[your mercy is good]]
 
 #rule(12)[#cop[ⲟⲩⲛ] and #cop[ⲙⲛ] with #cop[ⲛⲧⲉ] behave the same way.]
@@ -130,40 +130,40 @@ subject. Separation is plainer here, not less plain.]
 
 #group[Infinitive and object §§13–18]
 
-#rule(13)[Separate the reduced infinitive from its nominal object. Joining
+#rule(13)[*Separate* the reduced infinitive from its nominal object. Joining
 the two is the single largest source of obscurity in Coptic printing.]
 #ex[#cop[ⲛ ⲟⲩϫⲱⲱⲙⲉ] #gl[to bring a book]]
 #ex[#cop[ⲛⲟⲩϫⲱⲱⲙⲉ] #gl[of a book, to a book, a book (acc.)]]
 
-#rule(14)[#cop[ⲙⲉϩ-] forming ordinals joined; #cop[ⲙⲉϩ] #gl[fill] separate.]
+#rule(14)[#cop[ⲙⲉϩ-] forming ordinals *joined*; #cop[ⲙⲉϩ] #gl[fill] *separate*.]
 #ex[#cop[ⲙⲉϩϣⲟⲙⲛⲧ ⲛϫⲡⲟϥ] #gl[third basket]]
 #ex[#cop[ⲙⲉϩ ϣⲟⲙⲛⲧ ⲛϫⲡⲟϥ] #gl[fill three baskets]]
 
 #rule(15)[#cop[ⲟⲩⲛ] / #cop[ⲙⲛ] expanded with subject and object: where both
-are nominal, all three stand apart.]
+are nominal, all three *stand apart*.]
 #ex[#cop[ⲙⲛⲧⲉ ⲡⲛⲁ ⲕⲁⲥ] #gl[a spirit has no bone]]
 
-#rule(16)[Separate the object even from a very short infinitive, and even
+#rule(16)[*Separate* the object even from a very short infinitive, and even
 where the pair translates as one word.]
 #ex[#cop[ⲣ ⲛⲟⲃⲉ] #gl[to sin] · #cop[ϯ ⲉⲟⲟⲩ] #gl[to praise] · #cop[ϭⲙ ⲡϣⲓⲛⲉ] #gl[to visit]]
 
-#rule(17)[An infinitive governing an infinitive: also separate. Decisive
+#rule(17)[An infinitive governing an infinitive: also *separate*. Decisive
 after #cop[ϣ] #gl[be able].]
 #ex[#cop[ⲁϥϣ ⲱⲡ] #gl[he could count] · #cop[ⲁϥϣⲱⲡ] #gl[he bought]]
 
-#rule(18)[But #cop[ⲣ] / #cop[ⲉⲣ] / #cop[ⲉⲁ] before a Greek verb: joined. The
+#rule(18)[But #cop[ⲣ] / #cop[ⲉⲣ] / #cop[ⲉⲁ] before a Greek verb: *joined*. The
 combination has become one verb, and splitting it clarifies nothing.]
 #ex[#cop[ⲣⲁⲓⲧⲉⲓ], #cop[ⲉⲣⲁⲓⲧⲓⲛ] #gl[to ask] (αἰτεῖν)]
 
 #group[Prepositions §§19–22]
 
-#rule(19)[Prepositions separate, as in every other language. A second large
+#rule(19)[Prepositions *separate*, as in every other language. A second large
 source of doubt closes here.]
 #ex[#cop[ϫⲓⲛ ϩⲧⲟⲟⲩⲉ ϣⲁ ⲣⲟⲩϩⲉ] #gl[from morning to evening]]
 #ex[#cop[ⲙⲛ ⲧⲉϥⲙⲁⲁⲩ] #gl[with his mother] · #cop[ⲙⲛⲧⲉϥ ⲙⲁⲁⲩ] #gl[he has no mother]]
 
 #rule(20)[Exception by convention: the one-letter prepositions #cop[ⲉ] and
-#cop[ⲛ] are joined, a habit taken over from Hebrew and Arabic setting. For
+#cop[ⲛ] are *joined*, a habit taken over from Hebrew and Arabic setting. For
 #cop[ⲉ] there is no alternative — it cannot always be detached.]
 #ex[#cop[ⲁⲓⲛⲁⲩ ⲉⲩⲣⲱⲙⲉ] #gl[I saw a man]]
 
@@ -172,25 +172,25 @@ circumstantial can no longer be told apart. #cop[ⲉⲩⲙⲧⲟⲛ] has three r
 and no spacing will separate them.]
 
 #rule(22)[#cop[ⲛ] likewise carries plural article, negation, genitive, dative
-and accusative, all joined. Separate it only where it is the reduced
+and accusative, all *joined*. *Separate* it only where it is the reduced
 infinitive of #cop[ⲉⲓⲛⲉ] #gl[bring] (§13).]
 
 #group[Circumstantial, preterite, relative §§23–28]
 
-#rule(23)[Circumstantial #cop[ⲉ] joined, including where it contracts with a
+#rule(23)[Circumstantial #cop[ⲉ] *joined*, including where it contracts with a
 following #cop[ⲟⲩ] to #cop[ⲉⲩ].]
 #ex[#cop[ⲟⲩⲁ ⲉⲡⲉϥⲣⲁⲛ ⲡⲉ ⲡⲁⲩⲗⲟⲥ] #gl[one whose name is Paul]]
 
-#rule(24)[#cop[ⲛⲉ] and #cop[ⲉⲛⲉ] of the preterite joined; this is what marks
-off the interrogative #cop[ⲉⲛⲉ], which stands apart.]
+#rule(24)[#cop[ⲛⲉ] and #cop[ⲉⲛⲉ] of the preterite *joined*; this is what marks
+off the interrogative #cop[ⲉⲛⲉ], which *stands apart*.]
 #ex[#cop[ⲉⲛⲉⲛⲧⲕ ⲟⲩⲱϩⲥ] #gl[if you were a shepherd]]
 #ex[#cop[ⲉⲛⲉ ⲛⲧⲕ ⲟⲩⲱϩⲥ] #gl[are you a shepherd?]]
 
-#rule(25)[Relative #cop[ⲉ], #cop[ⲉⲧ], #cop[ⲛ], #cop[(ⲉ)ⲛⲧ]: joined tightly.
+#rule(25)[Relative #cop[ⲉ], #cop[ⲉⲧ], #cop[ⲛ], #cop[(ⲉ)ⲛⲧ]: *joined* tightly.
 In most combinations they could not be detached at all.]
 #ex[#cop[ⲡⲏⲓ ⲉⲛⲧⲁⲡⲁⲥⲟⲛ ⲃⲱⲕ ⲉϩⲟⲩⲛ ⲉⲣⲟϥ] #gl[the house my brother entered]]
 
-#rule(26)[#cop[ⲉⲧⲉ] alone stands apart, being followed by a noun, an
+#rule(26)[#cop[ⲉⲧⲉ] alone *stands apart*, being followed by a noun, an
 independent pronoun or a negation.]
 #ex[#cop[ⲧⲡⲏⲅⲏ ⲉⲧⲉ ⲡⲥⲱⲙⲁ ⲡⲉ] #gl[the spring that is the body]]
 
@@ -203,7 +203,7 @@ no doubt.]
 
 #group[The nominal sentence §§29–33]
 
-#rule(29)[A reduced pronominal subject stands apart. #cop[ⲁⲛⲅⲟⲩⲱϩⲥ] gains
+#rule(29)[A reduced pronominal subject *stands apart*. #cop[ⲁⲛⲅⲟⲩⲱϩⲥ] gains
 nothing over the alternative.]
 #ex[#cop[ⲁⲛⲟⲕ ⲟⲩⲱϩⲥ], #cop[ⲁⲛⲅ ⲟⲩⲱϩⲥ] #gl[I am a shepherd]]
 
@@ -212,7 +212,7 @@ conjugation prefixes.]
 #ex[#cop[ⲛⲧⲕ ⲟⲩⲉⲃⲟⲗ ⲧⲱⲛ] #gl[where are you from?]]
 #ex[#cop[ⲛⲧⲕⲟⲩⲉⲣⲏⲧⲉ] #gl[(of) your foot]]
 
-#rule(31)[#cop[ⲡⲉ], #cop[ⲧⲉ], #cop[ⲛⲉ] separate. #cop[ⲟⲩⲙⲉ ⲧⲉ] #gl[it is
+#rule(31)[#cop[ⲡⲉ], #cop[ⲧⲉ], #cop[ⲛⲉ] *separate*. #cop[ⲟⲩⲙⲉ ⲧⲉ] #gl[it is
 true] needs no operation performed on it.]
 
 #rule(32)[Joining them produces real misreadings, and not only among
@@ -228,34 +228,34 @@ Joining two words with no relation cannot help the reader.]
 
 #group[Clitics §§34–37]
 
-#rule(34)[Enclitics separate, or they are read as part of the preceding word.]
+#rule(34)[Enclitics *separate*, or they are read as part of the preceding word.]
 #ex[#cop[ⲧⲉⲛⲟⲩ ϭⲉ] #gl[now then]]
 
 #rule(35)[Proclitics likewise. #cop[ⲛϭⲓ] before a plural noun is the standing
 example.]
 #ex[#cop[ⲛϭⲓⲛϣⲁϫⲉ] #gl[the discourses] · #cop[ⲛϭⲓ ⲛϣⲁϫⲉ] #gl[that is, the words]]
 
-#rule(36)[#cop[ϫⲉ] separate: detached it is recognised at once. Join it only
+#rule(36)[#cop[ϫⲉ] *separate*: *detached* it is recognised at once. Join it only
 where the #cop[ⲉ] belongs to both words and neither split is writable.]
 #ex[#cop[ϫⲉ ⲉϥⲛⲁⲩ] #gl[that he may see] · but #cop[ϫⲉϥⲛⲁⲩ]]
 
-#rule(37)[Two words #cop[ⲕⲉ] #gl[other]: the common one joined, the rare
+#rule(37)[Two words #cop[ⲕⲉ] #gl[other]: the common one *joined*, the rare
 independent one apart.]
 #ex[#cop[ⲕⲉⲣⲱⲙⲉ] #gl[another man] · #cop[ⲡⲕⲉ ⲉⲧⲛⲧⲁϥ] #gl[also that which he has]]
 
 #group[Compounds, affixes, suffixes §§38–40]
 
-#rule(38)[Compounds with a reduced first element: joined where that element
+#rule(38)[Compounds with a reduced first element: *joined* where that element
 never occurs alone, which is why joining costs no clarity.]
 #ex[#cop[ⲥⲁⲩⲏⲣⲡ] #gl[wine-drinker] · #cop[ⲙⲁⲓⲛⲟⲩⲧⲉ] #gl[God-loving]]
 #ex[but #cop[ⲥⲟⲩⲁ ⲡϣ(ⲉ) ⲛϩⲱⲣ] #gl[Soua son of Hor], so the father's name stands out]
 
-#rule(39)[Noun-forming prefixes joined, on the same test. Detach any element
+#rule(39)[Noun-forming prefixes *joined*, on the same test. *Detach* any element
 that also occurs on its own.]
 #ex[#cop[ⲣⲉϥϫⲓⲟⲩⲉ] #gl[thief] · #cop[ⲙⲛⲧϫⲟⲉⲓⲥ] #gl[lordship] · #cop[ⲁⲧⲙⲁⲁⲩ] #gl[motherless]]
 #ex[but #cop[ⲃⲱ ⲛⲉⲗⲟⲟⲗⲉ] #gl[vine] · #cop[ⲙⲁ ⲛϣⲱⲡⲉ] #gl[dwelling] · #cop[ⲥⲁ ⲛⲛⲉϩ] #gl[oil-seller]]
 
-#rule(40)[Suffix pronouns joined — nobody proposes otherwise. But the full
+#rule(40)[Suffix pronouns *joined* — nobody proposes otherwise. But the full
 form #cop[ⲧⲏⲩⲧⲛ] (A A#sub[2] #cop[ⲧⲏⲛⲉ], F #cop[ⲧⲏⲛⲟⲩ], B #cop[ⲑⲏⲛⲟⲩ]) is
 not a suffix: the #cop[ⲱ] and #cop[ⲏ] show a full accent of its own.]
 #ex[#cop[ⲣⲁⲧⲛ] #gl[our foot] · #cop[ⲣⲁⲧ ⲧⲏⲩⲧⲛ] #gl[your foot]]
