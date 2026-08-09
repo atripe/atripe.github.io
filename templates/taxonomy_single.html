@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}{{ term.name }} — {{ config.title }}{% endblock %}
+
+{% block content %}
+<article class="prose">
+  <h1>Tagged &ldquo;{{ term.name }}&rdquo;</h1>
+  {% set notes = term %}
+  {% include "_postlist.html" %}
+  <p class="more"><a href="{{ get_url(path='@/notes/_index.md') }}">All notes &rarr;</a></p>
+</article>
+{% endblock %}

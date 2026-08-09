@@ -1,0 +1,496 @@
+/* ------------------------------------------------------------------
+   atripe — a 1998 personal homepage that happens to be about Coptic.
+
+   Everything here is period-correct on purpose: tiled background,
+   beveled boxes, Times body copy, Arial Black headings, a hit counter,
+   a webring, and an eternally unfinished construction sign. The only
+   modern concessions are the ones nobody should have to opt out of —
+   keyboard focus, reduced motion, and a layout that survives a phone.
+
+   No images ship with this site: the tile, the buttons, the counter
+   and the badges are all CSS.
+   ------------------------------------------------------------------ */
+
+:root {
+  /* Ink and parchment, but turned up to 1998. */
+  --paper:      #fffdf0;
+  --paper-alt:  #fff4cc;
+  --ink:        #1a1a1a;
+  --ink-soft:   #5a5145;
+
+  --rubric:     #cc0000;   /* red-lead headings */
+  --navy:       #000080;   /* every 90s heading, ever */
+  --ochre:      #b8860b;
+  --teal:       #008080;
+
+  --link:       #0000ee;
+  --link-vis:   #551a8b;
+  --link-act:   #ee0000;
+
+  --bevel-lit:  #ffffff;
+  --bevel-dim:  #808080;
+  --bevel-face: #d4d0c8;   /* Windows 95 grey, the true color of the era */
+
+  --body: "Times New Roman", Times, serif;
+  --display: "Arial Black", Arial, Helvetica, sans-serif;
+  --ui: Arial, Helvetica, sans-serif;
+  --fun: "Comic Sans MS", "Comic Neue", "Chalkboard SE", cursive;
+  --mono: "Courier New", Courier, monospace;
+  /* Coptic needs its own stack: most system faces have no U+2C80 block. */
+  --copt: "Antinoou", "New Athena Unicode", "Noto Sans Coptic",
+          "Segoe UI Historic", "Sophia Nubian", "FreeSerif", Georgia, serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  padding: 12px 8px 28px;
+  font: 400 16px/1.5 var(--body);
+  color: var(--ink);
+  background-color: #331a15;
+  /* The tiled background. An ankh, repeating forever, as intended. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Crect width='36' height='36' fill='%23331a15'/%3E%3Cg fill='%236d3b2c'%3E%3Cellipse cx='18' cy='8' rx='5.5' ry='6.5'/%3E%3Crect x='16.2' y='13' width='3.6' height='16'/%3E%3Crect x='9' y='17' width='18' height='3.6'/%3E%3C/g%3E%3Cellipse cx='18' cy='8' rx='2.4' ry='3.2' fill='%23331a15'/%3E%3C/svg%3E");
+}
+
+.skip { position: absolute; left: -9999px; }
+.skip:focus {
+  left: 50%; top: 8px; transform: translateX(-50%); z-index: 10;
+  padding: 6px 12px; background: var(--paper); color: var(--ink);
+  border: 3px outset var(--bevel-face);
+}
+
+/* --- Coptic ---------------------------------------------------------
+   A low-priority utility, defined early so any rule below that sets a
+   size on Coptic text wins over it. */
+
+.copt {
+  font-family: var(--copt);
+  font-size: 1.15em;
+  line-height: 1.4;
+}
+
+/* --- the page ------------------------------------------------------- */
+
+.page {
+  width: 100%;
+  max-width: 760px;   /* 800×600, minus the scrollbar. Obviously. */
+  margin: 0 auto;
+  border-collapse: collapse;
+  /* Without this the marquee's nowrap text sets the table's width. */
+  table-layout: fixed;
+  background: var(--paper);
+  border: 4px ridge var(--ochre);
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.5);
+}
+.page > tbody > tr > td { padding: 0; }
+
+/* --- masthead -------------------------------------------------------- */
+
+.masthead {
+  padding: 18px 12px 0;
+  text-align: center;
+  background: var(--paper-alt);
+}
+
+.wordmark { display: block; text-decoration: none; line-height: 1; }
+
+.wordmark-copt {
+  display: block;
+  font-size: 54px;
+  color: var(--rubric);
+  /* A chiseled bevel, the way every 90s title graphic was chiseled. */
+  text-shadow: 1px 1px 0 #fff, 2px 2px 0 var(--ochre), 3px 3px 0 #8b4513;
+}
+
+.wordmark-latin {
+  display: block;
+  margin-top: 8px;
+  font: 700 15px/1 var(--fun);
+  letter-spacing: 0.08em;
+  color: var(--teal);
+}
+
+.wordmark:hover .wordmark-copt { color: #ff2200; }
+
+/* The gradient divider bar, direct descendant of the rainbow rule GIF. */
+.rainbow {
+  height: 6px;
+  margin: 14px 0 0;
+  background: linear-gradient(to right,
+    #cc0000, #ff8800, #ffdd00, #33aa33, #0066cc, #663399, #cc0000);
+}
+
+/* --- marquee --------------------------------------------------------- */
+
+.marquee {
+  overflow: hidden;
+  padding: 4px 0;
+  background: var(--navy);
+  border-bottom: 2px solid #000;
+}
+.marquee p {
+  margin: 0;
+  display: inline-block;
+  white-space: nowrap;
+  padding-left: 100%;
+  font: 400 14px/1.4 var(--fun);
+  color: #ffff66;
+  animation: scroll 26s linear infinite;
+}
+@keyframes scroll { to { transform: translateX(-100%); } }
+
+/* --- columns --------------------------------------------------------- */
+
+.columns { display: flex; align-items: flex-start; gap: 14px; padding: 14px; }
+
+.sidebar { flex: 0 0 168px; min-width: 0; }
+
+.content {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 14px 16px;
+  background: #fff;
+  border: 2px inset var(--bevel-face);
+}
+
+/* --- sidebar boxes ---------------------------------------------------- */
+
+.box {
+  margin-bottom: 12px;
+  background: var(--bevel-face);
+  border: 3px outset var(--bevel-face);
+}
+
+.box-title {
+  margin: 0;
+  padding: 3px 6px;
+  font: 700 12px/1.5 var(--ui);
+  letter-spacing: 0.05em;
+  text-align: center;
+  color: #fff;
+  background: var(--navy);
+  border-bottom: 1px solid #000;
+}
+
+/* Beveled nav buttons — the sidebar of every homepage in 1998. */
+.buttons { margin: 0; padding: 6px; list-style: none; }
+.buttons li { margin-bottom: 5px; }
+.buttons li:last-child { margin-bottom: 0; }
+.buttons a {
+  display: block;
+  padding: 4px 6px;
+  font: 700 12px/1.4 var(--ui);
+  text-align: center;
+  text-decoration: none;
+  color: var(--navy);
+  background: linear-gradient(to bottom, #f4f2ec, #ccc8bd);
+  border: 2px outset var(--bevel-face);
+}
+.buttons a:hover, .buttons a:focus-visible {
+  color: #fff;
+  background: var(--navy);
+}
+.buttons a:active { border-style: inset; }
+
+.linklist {
+  margin: 0;
+  padding: 7px 8px;
+  list-style: none;
+  font: 400 13px/1.5 var(--ui);
+}
+.linklist li { margin-bottom: 4px; padding-left: 13px; text-indent: -13px; }
+
+/* --- under construction ------------------------------------------------ */
+
+.construction {
+  margin-bottom: 12px;
+  background: #ffffcc;
+  border: 3px outset var(--bevel-face);
+  text-align: center;
+}
+.construction-bar {
+  height: 10px;
+  background: repeating-linear-gradient(45deg,
+    #000 0 8px, #ffcc00 8px 16px);
+}
+.construction p {
+  margin: 0;
+  padding: 6px 4px;
+  font: 700 12px/1.35 var(--ui);
+  color: #cc6600;
+}
+.hardhat {
+  display: block;
+  font-size: 22px;
+  animation: nudge 1.4s ease-in-out infinite;
+}
+@keyframes nudge {
+  0%, 100% { transform: rotate(-12deg); }
+  50%      { transform: rotate(12deg); }
+}
+
+/* --- hit counter -------------------------------------------------------- */
+
+.box-counter { text-align: center; }
+.counter {
+  margin: 8px 0 2px;
+  font: 700 17px/1 var(--mono);
+  letter-spacing: 2px;
+}
+.counter span {
+  display: inline-block;
+  padding: 3px 2px;
+  min-width: 15px;
+  color: #33ff33;
+  background: #000;
+  border: 1px solid #444;
+}
+.counter-note {
+  margin: 0;
+  padding-bottom: 7px;
+  font: 400 10px/1.3 var(--ui);
+  color: #333;
+}
+
+.mailme {
+  margin: 0;
+  padding: 7px 8px;
+  font: 400 12px/1.5 var(--ui);
+}
+
+/* --- links --------------------------------------------------------------- */
+
+a { color: var(--link); }
+a:visited { color: var(--link-vis); }
+a:active { color: var(--link-act); }
+:focus-visible { outline: 2px solid var(--rubric); outline-offset: 2px; }
+
+/* --- prose ---------------------------------------------------------------- */
+
+.prose + .prose { margin-top: 26px; }
+
+.prose h1 {
+  margin: 0 0 12px;
+  font: 900 27px/1.15 var(--display);
+  color: var(--navy);
+  text-shadow: 1px 1px 0 #ccc;
+}
+
+/* The one thing kept from the manuscripts: a section opens in red with an
+   oversized initial, the way a Coptic scribe marked a new unit of text. */
+.prose h2 {
+  margin: 26px 0 8px;
+  padding-bottom: 3px;
+  font: 700 21px/1.25 var(--body);
+  color: var(--rubric);
+  border-bottom: 2px solid var(--ochre);
+}
+.prose h2::first-letter { font-size: 1.5em; }
+
+.prose h3 {
+  margin: 20px 0 6px;
+  font: 700 13px/1.4 var(--ui);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+.prose p { margin: 0 0 13px; }
+.prose ul, .prose ol { margin: 0 0 13px; padding-left: 26px; }
+.prose li { margin-bottom: 5px; }
+
+.prose blockquote {
+  margin: 14px 0;
+  padding: 8px 12px;
+  background: var(--paper-alt);
+  border-left: 5px solid var(--ochre);
+  font-style: italic;
+}
+
+.prose code {
+  font-family: var(--mono);
+  font-size: 0.9em;
+  background: #ffffcc;
+  border: 1px solid #e0d8a8;
+  padding: 0 3px;
+}
+
+.prose pre {
+  overflow-x: auto;
+  padding: 9px 11px;
+  border: 2px inset var(--bevel-face);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.prose pre code { background: none; border: 0; padding: 0; }
+
+.prose img { max-width: 100%; height: auto; }
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 13px;
+  font-size: 14px;
+  border: 2px outset var(--bevel-face);
+}
+.prose th, .prose td { border: 1px solid #b0aca0; padding: 4px 7px; text-align: left; }
+.prose th {
+  font: 700 12px/1.4 var(--ui);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--teal);
+}
+.prose tr:nth-child(even) td { background: var(--paper); }
+
+/* A 3D rule, the browser default of the era, made deliberate. */
+.prose hr {
+  height: 0;
+  margin: 22px 0;
+  border: 0;
+  border-top: 2px groove #c0c0c0;
+}
+
+/* --- post list -------------------------------------------------------------- */
+
+.postlist { margin: 12px 0; padding: 0; list-style: none; }
+
+.postlist li {
+  margin-bottom: 10px;
+  padding: 7px 9px;
+  background: var(--paper);
+  border: 1px solid #ddd6bb;
+  border-left: 5px solid var(--ochre);
+}
+
+.postlist-date {
+  font: 400 12px/1.4 var(--mono);
+  color: var(--ink-soft);
+}
+
+.postlist-link { font-weight: 700; }
+
+.postlist-gloss {
+  display: block;
+  margin-top: 3px;
+  font-size: 14px;
+  color: #444;
+}
+
+/* The blinking NEW! tag. Non-negotiable. */
+.new {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 4px;
+  font: 700 10px/1.4 var(--ui);
+  color: #fff;
+  background: var(--rubric);
+  animation: blink 1.1s steps(1) infinite;
+}
+@keyframes blink { 50% { opacity: 0.15; } }
+
+.more { font: 700 14px/1.5 var(--ui); }
+
+/* --- byline, tags, pager ------------------------------------------------------ */
+
+.byline {
+  margin: -4px 0 16px;
+  padding: 4px 7px;
+  font: 400 12px/1.5 var(--ui);
+  color: #333;
+  background: var(--paper-alt);
+  border: 1px solid #e6dcae;
+}
+.byline-sep { margin: 0 5px; color: #aaa; }
+
+.tag { font-family: var(--mono); font-size: 12px; }
+.tag + .tag { margin-left: 6px; }
+
+.taglist { margin: 0; padding: 0; list-style: none; }
+.taglist li { padding: 3px 0; }
+.tag-count { font: 400 12px var(--mono); color: var(--ink-soft); }
+
+.pager {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  justify-content: space-between;
+  margin-top: 22px;
+  padding-top: 10px;
+  border-top: 2px groove #c0c0c0;
+  font: 400 13px/1.4 var(--ui);
+}
+.pager-prev { margin-left: auto; text-align: right; }
+
+/* --- footer -------------------------------------------------------------------- */
+
+.footer { padding: 12px; text-align: center; background: var(--paper-alt); }
+
+.webring {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 7px 14px;
+  font: 400 13px/1.7 var(--ui);
+  background: #fff;
+  border: 3px ridge var(--teal);
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+/* 88×31, drawn in CSS. The web's oldest unit of measurement. */
+.badge {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 88px;
+  height: 31px;
+  padding: 0 3px;
+  border: 1px solid #000;
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.5),
+              inset -1px -1px 0 rgba(0, 0, 0, 0.4);
+  font-family: var(--ui);
+  color: #fff;
+  text-align: center;
+  overflow: hidden;
+}
+.badge b { font-size: 11px; line-height: 12px; letter-spacing: 0.03em; }
+.badge i { font-size: 8px; line-height: 9px; font-style: normal; opacity: 0.9; }
+.badge-rubric { background: linear-gradient(to bottom, #e03024, #8b0000); }
+.badge-lapis  { background: linear-gradient(to bottom, #4a7ec0, #000080); }
+.badge-ochre  { background: linear-gradient(to bottom, #d9a63c, #8b6508); }
+.badge-grey   { background: linear-gradient(to bottom, #6f6f6f, #2b2b2b); }
+
+.colophon {
+  margin: 0;
+  font: 400 11px/1.7 var(--ui);
+  color: #5a5145;
+}
+
+/* --- narrow screens ------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  body { padding: 6px 4px 20px; }
+  .columns { flex-direction: column; padding: 10px; gap: 10px; }
+  .sidebar { flex: none; width: 100%; }
+  .buttons { display: flex; flex-wrap: wrap; gap: 5px; }
+  .buttons li { flex: 1 1 90px; margin-bottom: 0; }
+  .content { padding: 12px; }
+  .wordmark-copt { font-size: 40px; }
+  .prose h1 { font-size: 22px; }
+}
+
+/* --- for people who asked for less ---------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee p { animation: none; padding-left: 0; white-space: normal; }
+  .hardhat, .new { animation: none; }
+}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<article class="prose">
+  <h1>{{ section.title }}</h1>
+  {{ section.content | safe }}
+</article>
+
+{% set notes = get_section(path="notes/_index.md") %}
+<section class="prose">
+  <h2>Latest notes</h2>
+  {% include "_postlist.html" %}
+  <p class="more"><a href="{{ notes.permalink }}">All notes &rarr;</a></p>
+</section>
+{% endblock %}

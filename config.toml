@@ -1,0 +1,41 @@
+base_url = "https://atripe.github.io"
+title = "atripe"
+description = "A small portal for Coptic — notes, orthography, manuscripts, and links worth keeping."
+default_language = "en"
+
+compile_sass = false
+build_search_index = false
+generate_feeds = true
+feed_filenames = ["atom.xml"]
+
+[markdown]
+smart_punctuation = true
+bottom_footnotes = true
+
+[markdown.highlighting]
+enabled = true
+theme = "solarized-light"
+
+[[taxonomies]]
+name = "tags"
+feed = true
+
+[extra]
+subtitle = "notes from a desk piled with Sahidic"
+author = "the atripe desk"
+# Purely decorative. Bump it when you feel the site deserves it.
+counter = ["0", "0", "0", "1", "4", "5", "9"]
+guestbook = "https://github.com/atripe/atripe.github.io/issues"
+# Small outbound list rendered in the sidebar. Keep it short; the Links page is
+# where the full portal lives.
+[[extra.elsewhere]]
+name = "Coptic Scriptorium"
+url = "https://copticscriptorium.org"
+
+[[extra.elsewhere]]
+name = "Coptic Dictionary Online"
+url = "https://coptic-dictionary.org"
+
+[[extra.elsewhere]]
+name = "PAThs atlas"
+url = "https://atlas.paths-erc.eu"

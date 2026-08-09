@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Not found — {{ config.title }}{% endblock %}
+
+{% block content %}
+<article class="prose">
+  <h1>Not found</h1>
+  <p>
+    Like most of the White Monastery library, this page is somewhere else.
+    Unlike the library, it probably never existed.
+  </p>
+  <p>
+    Try the <a href="{{ get_url(path='@/notes/_index.md') }}">notes</a>, the
+    <a href="{{ get_url(path='@/links/_index.md') }}">links</a>, or the
+    <a href="{{ get_url(path='@/_index.md') }}">front page</a>.
+  </p>
+</article>
+{% endblock %}

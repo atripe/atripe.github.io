@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{{ config.title }}{% endblock %}</title>
+<meta name="description" content="{% block description %}{{ config.description }}{% endblock %}">
+<meta name="keywords" content="coptic, sahidic, bohairic, shenoute, papyrology, manuscripts, unicode">
+<link rel="stylesheet" href="{{ get_url(path='style.css', cachebust=true) }}">
+<link rel="alternate" type="application/atom+xml" title="{{ config.title }}" href="{{ get_url(path='atom.xml', trailing_slash=false) }}">
+<link rel="icon" href="{{ get_url(path='favicon.svg') }}" type="image/svg+xml">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<table class="page" role="presentation">
+<tr><td>
+
+  <header class="masthead">
+    <a class="wordmark" href="{{ get_url(path='@/_index.md') }}">
+      <span class="wordmark-copt copt">ⲁⲧⲣⲓⲡⲉ</span>
+      <span class="wordmark-latin">~ A t r i p e ~</span>
+    </a>
+    <div class="rainbow"></div>
+    <div class="marquee"><p>Ⲭⲉⲣⲉ! Welcome to my Coptic page &nbsp;✠&nbsp; {{ config.extra.subtitle }} &nbsp;✠&nbsp; This page is best viewed with your eyes &nbsp;✠&nbsp;</p></div>
+  </header>
+
+  <div class="columns">
+
+    <nav class="sidebar" aria-label="Site">
+
+      <div class="box">
+        <h2 class="box-title">~ Menu ~</h2>
+        <ul class="buttons">
+          <li><a href="{{ get_url(path='@/_index.md') }}">Home</a></li>
+          <li><a href="{{ get_url(path='@/notes/_index.md') }}">My Notes</a></li>
+          <li><a href="{{ get_url(path='@/links/_index.md') }}">Cool Links</a></li>
+          <li><a href="{{ get_url(path='@/about.md') }}">About Me</a></li>
+          <li><a href="{{ get_url(path='atom.xml', trailing_slash=false) }}">Newsfeed</a></li>
+        </ul>
+      </div>
+
+      <div class="box">
+        <h2 class="box-title">Cool Sites</h2>
+        <ul class="linklist">
+          {% for site in config.extra.elsewhere %}
+          <li>&raquo; <a href="{{ site.url }}" rel="noopener">{{ site.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="construction">
+        <div class="construction-bar"></div>
+        <p><span class="hardhat">🚧</span> UNDER<br>CONSTRUCTION</p>
+        <div class="construction-bar"></div>
+      </div>
+
+      <div class="box box-counter">
+        <h2 class="box-title">Visitors</h2>
+        <p class="counter">{% for d in config.extra.counter %}<span>{{ d }}</span>{% endfor %}</p>
+        <p class="counter-note">since 1998</p>
+      </div>
+
+      <div class="box">
+        <h2 class="box-title">Mail Me</h2>
+        <p class="mailme">
+          Found a mistake? Know a text?<br>
+          <a href="{{ config.extra.guestbook }}" rel="noopener">✉ Sign the guestbook</a>
+        </p>
+      </div>
+
+    </nav>
+
+    <main class="content" id="main">
+      {% block content %}{% endblock %}
+    </main>
+
+  </div>
+
+  <div class="rainbow"></div>
+
+  <footer class="footer">
+
+    <div class="webring">
+      <b>The Coptic Studies Webring</b><br>
+      <a href="{{ get_url(path='@/links/_index.md') }}">&laquo; Prev</a> |
+      <a href="{{ get_url(path='@/links/_index.md') }}">Ring Hub</a> |
+      <a href="{{ get_url(path='@/links/_index.md') }}">Random</a> |
+      <a href="{{ get_url(path='@/links/_index.md') }}">Next &raquo;</a>
+    </div>
+
+    <div class="badges">
+      <span class="badge badge-rubric"><b>Zola</b><i>powered!</i></span>
+      <span class="badge badge-lapis"><b>Unicode</b><i>Coptic inside</i></span>
+      <span class="badge badge-ochre"><b>No JS</b><i>none at all</i></span>
+      <span class="badge badge-grey"><b>Hand&nbsp;Coded</b><i>in a text editor</i></span>
+    </div>
+
+    <p class="colophon">
+      Last updated {{ now() | date(format='%d %B %Y') }} &nbsp;·&nbsp;
+      Best viewed at 800&times;600 or literally anything since &nbsp;·&nbsp;
+      Text is CC BY-SA 4.0<br>
+      This page is not affiliated with any monastery, past or present.
+    </p>
+
+  </footer>
+
+</td></tr>
+</table>
+
+</body>
+</html>
