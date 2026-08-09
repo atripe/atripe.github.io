@@ -1,7 +1,14 @@
 {# Expects `projects` — a section whose pages are projects. #}
 <dl>
 {% for page in projects.pages %}
-  <dt><a href="{{ page.permalink }}">{{ page.title }}</a></dt>
+  <dt>
+    {% if page.extra.image %}
+    <figure class="marginnote">
+      <a href="{{ page.permalink }}"><img src="{{ page.permalink }}{{ page.extra.image }}" alt="{{ page.title }}"></a>
+    </figure>
+    {% endif %}
+    <a href="{{ page.permalink }}">{{ page.title }}</a>
+  </dt>
   {% if page.description or page.extra.status %}
   <dd>
     {% if page.description %}{{ page.description }}{% endif %}

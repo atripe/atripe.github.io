@@ -47,9 +47,12 @@
   /* Text column, then the apron to its right that holds notes and figures.
      body is the sum of the three, so the block centres as a whole and the
      text column sits left of centre. */
-  --measure: 40em;
-  --apron: 17em;
-  --apron-gap: 3em;
+  /* rem, not em: margin notes set their own font-size, and em would resolve
+     these against it — leaving the notes narrower than the apron reserved
+     for them on body. */
+  --measure: 40rem;
+  --apron: 17rem;
+  --apron-gap: 3rem;
 
   --serif: "New Athena Unicode", "Times New Roman", Times, serif;
   --mono: "Courier New", Courier, monospace;
@@ -83,7 +86,13 @@ body {
 /* The masthead, nav, rules and footer span the whole block, so the centred
    ones centre over the page as a whole. Only the running text is held to the
    measure, which leaves the apron beside it free for margin notes. */
-main { max-width: var(--measure); }
+/* flow-root so main's height includes the margin notes floated out of it —
+   without it a tall note hangs below and the footer rule cuts across it.
+   Unlike overflow:hidden this contains them without clipping the apron. */
+main {
+  max-width: var(--measure);
+  display: flow-root;
+}
 
 /* Must precede any rule that sizes Coptic text, so that rule wins. */
 .copt { font-family: var(--copt); font-size: 1.15em; }
@@ -198,7 +207,9 @@ figcaption { margin-top: 0.6em; font-size: 0.9em; }
 
 figure.marginnote { margin-top: 0.4em; }
 
-figure.marginnote img { width: 100%; }
+/* max-width, not width: a margin image narrower than the apron should sit at
+   its own size rather than being blown up to fill it. */
+figure.marginnote img { max-width: 100%; }
 
 /* Citations are numbered by a counter rather than by hand, so inserting one
    mid-draft does not mean renumbering the rest. The marker increments it and

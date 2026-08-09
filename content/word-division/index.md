@@ -1,6 +1,10 @@
 +++
 title = "Word division"
+description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
 weight = 10
+
+[extra]
+image = "word-division.png"
 +++
 
 <figure class="marginnote">
