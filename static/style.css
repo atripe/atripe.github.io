@@ -80,9 +80,10 @@ body {
   counter-reset: sidenote;
 }
 
-/* Everything ordinary is held to the text column; only margin notes are
-   allowed out into the apron. */
-body > * { max-width: var(--measure); }
+/* The masthead, nav, rules and footer span the whole block, so the centred
+   ones centre over the page as a whole. Only the running text is held to the
+   measure, which leaves the apron beside it free for margin notes. */
+main { max-width: var(--measure); }
 
 /* Must precede any rule that sizes Coptic text, so that rule wins. */
 .copt { font-family: var(--copt); font-size: 1.15em; }
