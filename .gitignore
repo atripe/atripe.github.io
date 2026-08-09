@@ -2,3 +2,5 @@ public/
 result
 result-*
 .direnv/
+# Built by `nix build .#cheatsheet`, copied in for local preview.
+content/word-division/cheatsheet.pdf

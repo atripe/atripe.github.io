@@ -259,6 +259,12 @@ figure.marginnote img { max-width: 100%; }
   figure.marginnote img { width: auto; max-width: 18em; }
 }
 
+/* Narrower still: a two-column table of Coptic and gloss will not fit, so let
+   it scroll inside itself rather than widening the page. */
+@media (max-width: 46em) {
+  table { display: block; overflow-x: auto; }
+}
+
 /* --- footer ------------------------------------------------------------ */
 
 .pagefoot { text-align: center; font-size: 0.9em; }

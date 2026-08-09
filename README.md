@@ -26,9 +26,27 @@ python3 -m http.server 8000 --directory public
 ## Build
 
 ```sh
-nix build        # -> ./result
-zola check       # validate links
+nix build              # -> ./result, the whole site
+nix build .#cheatsheet # -> ./result/cheatsheet.pdf, the A4 sheet alone
+zola check             # validate links
 ```
+
+`nix build` compiles the cheat sheet, drops it into `content/word-division/`
+as a colocated asset and then runs Zola, so the published page always links a
+sheet built from the same commit.
+
+**`zola serve` will 404 that link**, because the PDF only exists after a Nix
+build. Put one there once:
+
+```sh
+nix build .#cheatsheet && cp result/cheatsheet.pdf content/word-division/
+```
+
+It is gitignored, so it will not be committed by accident.
+
+The sheet is set in New Athena Unicode like the rest of the site. Typst reads
+TTF and OTF but not WOFF, so the flake unwraps the shipped WOFF with
+`fontTools` at build time rather than committing the same font twice.
 
 ## Layout
 
@@ -40,10 +58,11 @@ content/<project>/        same, with assets: index.md plus its images
 content/about/_index.md   about page
 content/links/_index.md   links page
 templates/                Tera templates; base.html holds the page furniture
-templates/shortcodes/     copt.html wraps Coptic text for the font stack
+templates/shortcodes/     copt.html, cite.html, margin.html
 static/style.css          all of the CSS
 static/fonts/             New Athena Unicode (WOFF) + OFL licence
-flake.nix                 dev shell + a derivation that builds the site
+typst/word-division.typ   the A4 cheat sheet, built by the flake
+flake.nix                 dev shell + derivations for the site and the sheet
 ```
 
 Projects sit at the root — `/word-division/`, not `/projects/word-division/`.
