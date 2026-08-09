@@ -17,3 +17,5 @@ subtitle = "Coptic in the cloud"
 author = ""
 email = ""
 github = "https://github.com/atripe"
+# Rendered in the footer as given; HTML is allowed, so it can carry a link.
+license = ""

@@ -261,4 +261,7 @@ figure.marginnote img { max-width: 100%; }
 
 /* --- footer ------------------------------------------------------------ */
 
-address { font-size: 0.9em; }
+.pagefoot { text-align: center; font-size: 0.9em; }
+.pagefoot p { margin: 0.4em 0; }
+
+.nowrap { white-space: nowrap; }

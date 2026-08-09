@@ -34,14 +34,22 @@
 {% block content %}{% endblock %}
 </main>
 
-{% if config.extra.email or config.extra.github %}
 <hr>
 
-<address>
-{% if config.extra.email %}{{ config.extra.email }}<br>{% endif %}
-{% if config.extra.github %}<a href="{{ config.extra.github }}">{{ config.extra.github | replace(from='https://', to='') }}</a>{% endif %}
-</address>
-{% endif %}
+{# Each item renders only if it is set, so the line grows as config.toml is
+   filled in rather than leaving empty separators behind. #}
+<footer class="pagefoot">
+<p>
+<a href="{{ get_url(path='@/_index.md') }}">Home</a>
+&middot; <a href="{{ get_url(path='@/links/_index.md') }}">Links</a>
+&middot; <a href="{{ get_url(path='@/about/_index.md') }}">About</a>
+{% if config.extra.github %}&middot; <a href="{{ config.extra.github }}">{{ config.extra.github | replace(from='https://', to='') }}</a>{% endif %}
+{% if config.extra.email %}&middot; <span class="nowrap">{{ config.extra.email }}</span>{% endif %}
+</p>
+<p class="meta">
+{% if config.extra.license %}{{ config.extra.license | safe }} &middot; {% endif %}built {{ now() | date(format='%-d %B %Y') }}
+</p>
+</footer>
 
 </body>
 </html>
