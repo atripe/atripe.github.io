@@ -15,81 +15,22 @@
       forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
     in
     {
-      packages = forAllSystems (
-        pkgs:
-        let
-          # Typst reads TTF and OTF but not WOFF, and the site ships the font
-          # as WOFF. WOFF is a wrapped TTF, so unwrap it here rather than
-          # committing the same font twice — this also guarantees the sheet
-          # and the pages are set from the same file.
-          coptic-font = pkgs.runCommand "new-athena-unicode-ttf" {
-            nativeBuildInputs = [ (pkgs.python3.withPackages (ps: [ ps.fonttools ])) ];
-            # All three faces, not only the regular. Given one face Typst
-            # synthesises the others, and faux bold on Coptic at 8pt fills in
-            # the counters; the sheet leans on real bold to stay scannable.
-            woffs = [
-              ./static/fonts/newathu5_8.woff
-              ./static/fonts/newathuBold5_8.woff
-              ./static/fonts/newathuItalic5_8.woff
-            ];
-          } ''
-            mkdir -p $out
-            for woff in $woffs; do
-              python3 -c '
-            import os, sys
-            from fontTools.ttLib import TTFont
-            font = TTFont(sys.argv[1])
-            font.flavor = None
-            name = os.path.basename(sys.argv[1]).replace(".woff", ".ttf")
-            font.save(os.path.join(os.environ["out"], name))
-            ' "$woff"
-            done
-          '';
-
-          cheatsheet = pkgs.stdenvNoCC.mkDerivation {
-            pname = "atripe-cheatsheet";
-            version = "0.1.0";
-            src = ./typst;
-            nativeBuildInputs = [ pkgs.typst ];
-            buildPhase = ''
-              export HOME=$TMPDIR
-              typst compile --font-path ${coptic-font} word-division.typ cheatsheet.pdf
-            '';
-            installPhase = ''
-              mkdir -p $out
-              cp cheatsheet.pdf $out/
-            '';
-          };
-        in
-        {
-          inherit coptic-font cheatsheet;
-
-          default = pkgs.stdenvNoCC.mkDerivation {
-            pname = "atripe";
-            version = "0.1.0";
-            src = ./.;
-            nativeBuildInputs = [ pkgs.zola ];
-            buildPhase = ''
-              # The cheat sheet is a colocated asset of the word-division page,
-              # so it has to be in place before zola runs.
-              cp ${cheatsheet}/cheatsheet.pdf content/word-division/
-              chmod +w content/word-division/cheatsheet.pdf
-              zola build --output-dir $out
-            '';
-            dontInstall = true;
-          };
-        }
-      );
+      packages = forAllSystems (pkgs: {
+        default = pkgs.stdenvNoCC.mkDerivation {
+          pname = "atripe";
+          version = "0.1.0";
+          src = ./.;
+          nativeBuildInputs = [ pkgs.zola ];
+          buildPhase = "zola build --output-dir $out";
+          dontInstall = true;
+        };
+      });
 
       devShells = forAllSystems (pkgs: {
         default = pkgs.mkShellNoCC {
-          packages = [
-            pkgs.zola
-            pkgs.typst
-          ];
+          packages = [ pkgs.zola ];
           shellHook = ''
             echo "atripe — 'zola serve' to preview (no --base-url, it breaks the CSS)"
-            echo "         'nix build .#cheatsheet' to regenerate the PDF"
           '';
         };
       });

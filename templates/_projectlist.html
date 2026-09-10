@@ -3,7 +3,10 @@
 {% for page in projects.pages %}
   <dt>
     {% if page.extra.image %}
-    <figure class="marginnote">
+    {# thumb, not a full-apron figure: in a list this sits beside two lines of
+       title and description, and at the apron's full 17rem it left a hole
+       three times its own height beside them. #}
+    <figure class="marginnote thumb">
       <a href="{{ page.permalink }}"><img src="{{ page.permalink }}{{ page.extra.image }}" alt="{{ page.title }}"></a>
     </figure>
     {% endif %}

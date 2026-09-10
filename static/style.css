@@ -1,29 +1,69 @@
 /* Solarized, light or dark per prefers-color-scheme.
-   New Athena Unicode, SIL OFL 1.1 — see fonts/OFL.txt. */
 
+   Two faces, and between them one job each. Libertinus Serif sets the page —
+   a Linux Libertine descendant, still maintained, and the widest coverage of
+   anything that also reads well as body text: Latin to Ext-B, IPA, Cyrillic,
+   Hebrew, and polytonic Greek, which a page about Coptic will reach for on
+   the first citation. CS Avva Shenouda Unicode sets the Coptic, and only the
+   Coptic — see its unicode-range below.
+
+   Libertinus Serif 7.051, SIL OFL 1.1 — see fonts/OFL-Libertinus.txt.
+   CS Avva Shenouda Unicode 2.0, Coptic Font Standard Project — see README. */
+
+/* WOFF2: about half the bytes of the OTF it was made from, and the flake
+   unwraps it back to an OTF for the cheat sheet, so the sheet and the site
+   stay set from one committed file per face. */
 @font-face {
-  font-family: "New Athena Unicode";
-  src: local("New Athena Unicode"),
-       url("fonts/newathu5_8.woff") format("woff");
+  font-family: "Libertinus Serif";
+  src: local("Libertinus Serif"),
+       url("fonts/LibertinusSerif-Regular.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "New Athena Unicode";
-  src: local("New Athena Unicode Italic"),
-       url("fonts/newathuItalic5_8.woff") format("woff");
+  font-family: "Libertinus Serif";
+  src: local("Libertinus Serif Italic"),
+       url("fonts/LibertinusSerif-Italic.woff2") format("woff2");
   font-weight: normal;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "New Athena Unicode";
-  src: local("New Athena Unicode Bold"),
-       url("fonts/newathuBold5_8.woff") format("woff");
+  font-family: "Libertinus Serif";
+  src: local("Libertinus Serif Bold"),
+       url("fonts/LibertinusSerif-Bold.woff2") format("woff2");
   font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* CS Avva Shenouda Unicode carries the Coptic alphabet and nothing else — 73
+   glyphs, no Latin, no digits, no punctuation. The unicode-range is therefore
+   what makes it usable: the face heads --serif, so every Coptic character on
+   the site is set in it whether or not anyone remembered to reach for .copt,
+   while every other character falls straight through to Libertinus.
+
+   The range is the font's cmap exactly, less U+0020. Its space is in the file
+   at 278 units against Libertinus's 250, and claiming it would reset the word
+   spacing of all the English on the site to suit one alphabet. The combining
+   marks are kept: U+0305 superlineation above all, but also the trema and the
+   dots below, which belong to the Coptic here rather than to the Greek. */
+@font-face {
+  font-family: "CS Avva Shenouda Unicode";
+  src: local("CS Avva Shenouda Unicode"),
+       url("fonts/CSAvvaShenoudaUnicode.ttf") format("truetype");
+  unicode-range: U+0300, U+0305, U+0307-0308, U+0323, U+0331,
+                 U+03E2-03EF, U+2C80-2CB1, U+2CC8-2CC9;
+  /* Its letters are 527 units tall and Libertinus's capitals 647, so at plain
+     1em the Coptic would sit visibly short of the Latin it runs beside. 123 %
+     is 647/527: it lines the two up, and it does so on the font rather than
+     on a class, so unmarked Coptic in the middle of a paragraph comes out the
+     right size too. The cheat sheet uses the same ratio as a size. */
+  size-adjust: 123%;
+  font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
@@ -50,15 +90,24 @@
   /* rem, not em: margin notes set their own font-size, and em would resolve
      these against it — leaving the notes narrower than the apron reserved
      for them on body. */
-  --measure: 40rem;
+  /* 34rem is 544px, and Libertinus at the 18px body size below averages
+     7.5px a character, so a full line runs about 72 characters — inside the
+     60-75 a reader's eye can return along without losing the next line. The
+     old 40rem was 96 characters, which is a measure for a footnote, not for
+     prose. */
+  --measure: 34rem;
   --apron: 17rem;
   --apron-gap: 3rem;
 
-  --serif: "New Athena Unicode", "Times New Roman", Times, serif;
+  /* The Coptic face first, but its unicode-range holds it to the Coptic, so
+     this is still Libertinus's stack for everything else. */
+  --serif: "CS Avva Shenouda Unicode", "Libertinus Serif",
+           "Linux Libertine O", "Times New Roman", Times, serif;
   --mono: "Courier New", Courier, monospace;
   /* Fallbacks for when the webfont is blocked: anything covering U+2C80. */
-  --copt: "New Athena Unicode", "Antinoou", "Noto Sans Coptic",
-          "Segoe UI Historic", "Sophia Nubian", "FreeSerif", serif;
+  --copt: "CS Avva Shenouda Unicode", "New Athena Unicode", "Antinoou",
+          "Noto Sans Coptic", "Segoe UI Historic", "Sophia Nubian",
+          "FreeSerif", serif;  /* Libertinus has no Coptic; these do. */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -79,7 +128,22 @@ body {
   background-color: var(--bg);
   color: var(--fg);
   font-family: var(--serif);
+  /* 18px, not the browser's 16. Libertinus has a small x-height — 431 units
+     against a 647 cap — so it sets smaller than its nominal size suggests,
+     the way the metal faces it descends from did. */
+  font-size: 1.125rem;
   line-height: 1.5;
+  /* Libertinus carries proper oldstyle figures, and in a serif text face they
+     are what belongs in running prose: they have ascenders and descenders and
+     so sit in a line of lowercase instead of standing up out of it like small
+     capitals. Lining figures are put back below wherever digits need to line
+     up in columns instead — tables, code, the margin's note numbers. */
+  font-variant-numeric: oldstyle-nums;
+  /* The face has kerning and both common and discretionary ligature sets; the
+     first two are what a book gets and the third is not, so name them rather
+     than leaving them to a browser default that varies at small sizes. */
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures contextual;
   counter-reset: sidenote;
 }
 
@@ -92,10 +156,28 @@ body {
 main {
   max-width: var(--measure);
   display: flow-root;
+  /* Hyphenation earns its keep here rather than in the masthead: the column
+     is unjustified, so without it a long word leaves a visibly short line,
+     and the margin notes are narrower still. lang="en" on <html> is what
+     tells the browser which patterns to use. */
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 
-/* Must precede any rule that sizes Coptic text, so that rule wins. */
-.copt { font-family: var(--copt); font-size: 1.15em; }
+/* Last lines of one or two words are the commonest blemish in a ragged
+   setting; the browser can avoid most of them by looking ahead at the whole
+   paragraph. Where it is not supported nothing changes. */
+p, li, dd, figcaption, blockquote { text-wrap: pretty; }
+
+/* Headings are short enough for the browser to even out instead — no lone
+   word left on a second line. */
+h1, h2, h3, h4, .wordmark, .tagline { text-wrap: balance; }
+
+/* Coptic gets its font and its size from --serif and size-adjust now, so what
+   is left here is the one thing the cascade cannot do by codepoint: name the
+   installed fonts to fall back to when the webfont does not load. Marking a
+   passage up is no longer what decides whether it is set in Coptic type. */
+.copt { font-family: var(--copt); }
 
 /* --- links ---------------------------------------------------------- */
 
@@ -103,6 +185,38 @@ a:link    { color: var(--link); }
 a:visited { color: var(--visited); }
 a:hover,
 a:active  { color: var(--active); }
+
+/* The default underline sits on the baseline and cuts through every
+   descender; a serif this size wants it a little lower and broken around
+   them. Both are what a browser does for a printed footnote. */
+a { text-underline-offset: 0.14em; text-decoration-skip-ink: auto; }
+
+/* A bare URL is one long unbreakable word, and the links page is made of
+   them. break-word rather than anywhere: ordinary prose still breaks at
+   spaces first, and only a word with nowhere to break is cut. */
+a { overflow-wrap: break-word; }
+
+/* A link inside a sentence needs its underline: colour alone does not tell a
+   reader where the link starts and stops, and not every reader sees colour.
+   A list whose every item is nothing but a link needs no such help — the list
+   is the signal — and nine underlines in a column read as hatching rather
+   than as text. `:only-child` is exactly that distinction, and it means the
+   links page and the project list get it without either template knowing.
+   The moment an item grows a description around the link, its underline
+   comes back on its own. A project title is `dt > a` without the qualifier:
+   the term always is the link, and the thumbnail that may sit beside it in
+   the same dt would otherwise disqualify it. */
+li > a:only-child,
+dt > a,
+.sitenav a:link,
+.sitenav a:visited { text-decoration: none; }
+
+li > a:only-child:hover,
+li > a:only-child:focus-visible,
+dt > a:hover,
+dt > a:focus-visible,
+.sitenav a:hover,
+.sitenav a:focus-visible { text-decoration: underline; }
 
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
@@ -120,9 +234,20 @@ a:active  { color: var(--active); }
 .masthead a:focus-visible,
 .masthead a:active { color: var(--fg-strong); text-decoration: underline; }
 
-.wordmark { font-size: 3em; line-height: 1.1; }
+/* 1.75, not the 1.1 a display line usually wants: this face descends 425
+   units and is scaled a further 123 %, so its ink is 1.73em tall and ⲣ's tail
+   in ⲁⲧⲣⲓⲡⲉ hangs straight through the tagline at anything tighter. */
+.wordmark { font-size: 3em; line-height: 1.75; }
 
-.tagline { font-size: 0.9em; }
+.tagline { font-size: 0.9em; font-style: italic; }
+
+/* The wordmark's line box carries the leading its descender needs, and half
+   of that lands above the cap where nothing uses it, so the block is pulled
+   back up by roughly that much. Optical, not structural: what should look
+   even here is the ink, not the boxes. */
+.masthead { margin-top: -0.5em; }
+
+.sitenav { margin-top: 0.9em; }
 
 .sitenav,
 .elsewhere { text-align: center; font-size: 0.9em; }
@@ -157,6 +282,9 @@ dd { margin: 0 0 0.7em 2em; }
 code, pre, tt, samp, kbd {
   font-family: var(--mono);
   color: var(--fg-strong);
+  /* Lining and tabular: in code a digit has to be the same width as the digit
+     under it, which is the opposite of what running prose wants. */
+  font-variant-numeric: lining-nums tabular-nums;
 }
 
 pre {
@@ -175,6 +303,8 @@ th, td {
   padding: 0.25em 0.6em;
   border: 1px solid var(--border);
   text-align: left;
+  /* Same reason as code: a column of numbers has to align down the page. */
+  font-variant-numeric: lining-nums tabular-nums;
 }
 
 th { background-color: var(--bg-alt); }
@@ -211,6 +341,12 @@ figure.marginnote { margin-top: 0.4em; }
    its own size rather than being blown up to fill it. */
 figure.marginnote img { max-width: 100%; }
 
+/* A thumbnail beside a list entry, rather than a figure beside an argument.
+   The apron stays 17rem wide so consecutive entries still line up down the
+   same edge; only the image inside it is held to a size that answers to two
+   lines of text. */
+figure.thumb img { max-width: 8em; }
+
 /* Citations are numbered by a counter rather than by hand, so inserting one
    mid-draft does not mean renumbering the rest. The marker increments it and
    the note that follows reads the same value without incrementing again. */
@@ -218,6 +354,7 @@ figure.marginnote img { max-width: 100%; }
 .noteref::after {
   counter-increment: sidenote;
   content: counter(sidenote);
+  font-variant-numeric: lining-nums;
   font-size: 0.7em;
   vertical-align: super;
   line-height: 0;
@@ -226,6 +363,7 @@ figure.marginnote img { max-width: 100%; }
 
 .sidenote::before {
   content: counter(sidenote) " ";
+  font-variant-numeric: lining-nums;
   font-size: 0.7em;
   vertical-align: super;
   line-height: 0;
@@ -233,8 +371,11 @@ figure.marginnote img { max-width: 100%; }
 }
 
 /* Below this there is no room for an apron, so notes rejoin the text as
-   set-off blocks. */
-@media (max-width: 66em) {
+   set-off blocks. 56em is the body's own width — 34 + 3 + 17rem of column,
+   apron and gutter, plus the 1em of padding either side. Media-query em is
+   always the root's 16px, never the 18px set on body, so this stays in step
+   with the layout above rather than with the text. */
+@media (max-width: 56em) {
   .marginnote,
   .sidenote {
     /* display:block matters — these are spans, and left inline they run on
@@ -263,6 +404,102 @@ figure.marginnote img { max-width: 100%; }
    it scroll inside itself rather than widening the page. */
 @media (max-width: 46em) {
   table { display: block; overflow-x: auto; }
+}
+
+/* --- print --------------------------------------------------------------
+   What goes is the furniture that only means anything to someone who can
+   click it, and the colour, which is a screen palette. What arrives is the
+   address behind every link, since on paper that is the only thing left of
+   it. The measure holds: a printed line wants the same 70-odd characters. */
+
+@media print {
+  /* Solarized is a screen palette — it assumes a lit background, and its
+     base00 on base3 comes out as grey ink on nothing. On paper the ink is
+     black and the page is the paper. */
+  :root {
+    --bg: #fff;
+    --bg-alt: #fff;
+    --fg: #000;
+    --fg-strong: #000;
+    --rule: #000;
+    --border: #000;
+    --link: #000;
+    --visited: #000;
+    --active: #000;
+  }
+
+  @page { margin: 18mm 16mm; }
+
+  body {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    /* Points, not pixels: the one place a physical unit is the right one. */
+    font-size: 10.5pt;
+  }
+
+  /* The nav is a set of things to click, and the footer's build date and
+     repository link belong to the site rather than to the text. The rules
+     went with them; on paper the space does that work. */
+  .sitenav,
+  .pagefoot,
+  hr { display: none; }
+
+  /* The masthead stays, smaller — a printout of one page should still say
+     what it came from. */
+  .wordmark { font-size: 1.8em; }
+
+  /* A link is worth nothing on paper unless the address comes with it. Not
+     for links whose text is already the address, and not for fragments or
+     mailto:, which would only repeat themselves. */
+  main a[href^="http"]::after {
+    content: " <" attr(href) ">";
+    font-size: 0.85em;
+    word-break: break-all;
+  }
+
+  /* Margin notes rejoin the text as they do on a narrow screen: a printer
+     has no scrollbar, and a note stranded past the right edge is simply
+     lost. */
+  .marginnote,
+  .sidenote {
+    float: none;
+    width: auto;
+    max-width: none;
+    margin: 0.8em 0 1em 1.5em;
+    padding-left: 1em;
+    border-left: 1px solid var(--border);
+  }
+
+  figure.marginnote,
+  figure.thumb {
+    margin-left: 0;
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  figure.thumb img { max-width: 12em; }
+
+  /* Nothing that reads as one unit should be split across a sheet, and a
+     heading at the foot of a page is a heading for nothing. Blockquotes are
+     not on this list on purpose: the one on /about/ runs ten lines, and
+     refusing to break it only moves the whole thing to the next sheet and
+     leaves half a page empty behind it. Long quotations break; orphans and
+     widows below are what keeps the break civil. */
+  figure,
+  table,
+  pre { break-inside: avoid; }
+
+  h1, h2, h3, h4 { break-after: avoid; }
+
+  /* Two lines minimum either side of a break — the usual book rule, and the
+     browser default of 2 is not reliable across engines. */
+  p, blockquote, li { orphans: 2; widows: 2; }
+
+  /* A table that scrolls on a phone cannot scroll on paper. */
+  table { display: table; overflow: visible; }
+
+  img { max-width: 100%; }
 }
 
 /* --- footer ------------------------------------------------------------ */

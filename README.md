@@ -26,27 +26,13 @@ python3 -m http.server 8000 --directory public
 ## Build
 
 ```sh
-nix build              # -> ./result, the whole site
-nix build .#cheatsheet # -> ./result/cheatsheet.pdf, the A4 sheet alone
-zola check             # validate links
+nix build   # -> ./result, the whole site
+zola check  # validate links
 ```
 
-`nix build` compiles the cheat sheet, drops it into `content/word-division/`
-as a colocated asset and then runs Zola, so the published page always links a
-sheet built from the same commit.
-
-**`zola serve` will 404 that link**, because the PDF only exists after a Nix
-build. Put one there once:
-
-```sh
-nix build .#cheatsheet && cp result/cheatsheet.pdf content/word-division/
-```
-
-It is gitignored, so it will not be committed by accident.
-
-The sheet is set in New Athena Unicode like the rest of the site. Typst reads
-TTF and OTF but not WOFF, so the flake unwraps the shipped WOFF with
-`fontTools` at build time rather than committing the same font twice.
+There is nothing to build but the site itself: `nix build` runs Zola over the
+tree and that is the whole derivation, so `zola serve` and the published page
+see the same files.
 
 ## Layout
 
@@ -60,9 +46,9 @@ content/links/_index.md   links page
 templates/                Tera templates; base.html holds the page furniture
 templates/shortcodes/     copt.html, cite.html, margin.html
 static/style.css          all of the CSS
-static/fonts/             New Athena Unicode (WOFF) + OFL licence
-typst/word-division.typ   the A4 cheat sheet, built by the flake
-flake.nix                 dev shell + derivations for the site and the sheet
+static/fonts/             Libertinus Serif (WOFF2), the Coptic face (TTF)
+                          + the OFL for Libertinus
+flake.nix                 dev shell + the site derivation
 ```
 
 Projects sit at the root — `/word-division/`, not `/projects/word-division/`.
@@ -93,10 +79,14 @@ Projects have no dates and no tags; `weight` sets the order.
 ## Shortcodes
 
 ```
-{{/* copt(t="ⲃ ⲗ ⲙ ⲛ ⲣ") */}}                     Coptic, in the font stack
+{{/* copt(t="ⲃ ⲗ ⲙ ⲛ ⲣ") */}}                     Coptic, with the fallbacks
 {{/* cite(t="Crum, <em>A Coptic Dictionary</em> (Oxford, 1939), 168a.") */}}
 {{/* margin(t="An aside, unnumbered.") */}}
 ```
+
+`copt` is now optional: the Coptic face is applied by codepoint, so Coptic
+pasted straight into a paragraph is already set in it. The shortcode adds the
+list of installed Coptic fonts to fall back to when the webfont does not load.
 
 `cite` puts a superscript marker in the text and the reference in the right
 margin. Numbering is a CSS counter, so inserting one mid-draft renumbers the
@@ -125,13 +115,39 @@ Solarized, light or dark by `prefers-color-scheme`. No JavaScript, no
 external requests. Feeds and syntax highlighting are off — highlighting
 emits inline styles that ignore the dark mode.
 
-New Athena Unicode 5.008 (Society for Classical Studies, SIL OFL 1.1)
-covers Latin, polytonic Greek and both Coptic ranges. Three weights, about
-1.3 MB, served from this origin. `local()` is first in each `@font-face`
-and `font-display: swap` is set, so installed copies cost nothing and text
-paints before the download finishes. To drop the weight, delete the
-`@font-face` blocks and `static/fonts/` — `--serif` still names the font
-first, so anyone who has it installed keeps it.
+Two faces, one job each, both served from this origin — 650 kB in total.
+
+**Libertinus Serif 7.051** (SIL OFL 1.1, `fonts/OFL-Libertinus.txt`) sets the
+page. It is a maintained Linux Libertine descendant, and among faces that read
+well as body text it has the widest coverage: Latin through Ext-B, IPA,
+Cyrillic, Hebrew, and the polytonic Greek a page about Coptic reaches for on
+its first citation. Three weights as WOFF2, 590 kB.
+
+**CS Avva Shenouda Unicode 2.0** (Coptic Font Standard Project,
+`CopticChurch.net/coptic_fonts`) sets the Coptic. It is 73 glyphs — the two
+Coptic ranges, the combining marks and a space — so it cannot set a page on
+its own, and it does not have to: its `@font-face` carries a `unicode-range`,
+which means **any Coptic character anywhere on the site is set in it**, marked
+up or not, and every other character falls through to Libertinus. Its letters
+are 527 units against Libertinus's 647-unit capitals, so `size-adjust: 123%`
+puts the two at one height on the font rather than on a class. 43 kB as TTF.
+Its own metadata carries no licence beyond a 2002 copyright line; the file
+permits embedding (`fsType` 0) and the CS fonts are distributed as freeware
+for Coptic use, but that is not the explicit grant the OFL gives.
+
+`local()` is first in each `@font-face` and `font-display: swap` is set, so
+installed copies cost nothing and text paints before the download finishes.
+The two faces the first paint needs are preloaded in `base.html`.
+
+Typography follows the usual rules rather than the browser defaults: an 18px
+body, a 34rem measure that comes to about 72 characters, oldstyle figures in
+prose and lining tabular ones in tables, code and note numbers, automatic
+hyphenation in the text column, `text-wrap: pretty` on paragraphs and
+`balance` on headings.
+
+To drop the weight, delete the `@font-face` blocks and `static/fonts/` —
+`--serif` still names both faces first, so anyone who has them installed
+keeps them.
 
 ## Deploy
 

@@ -1,4 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- ⲁ, U+2C81, as an outline traced from CS Avva Shenouda Unicode rather
+       than set as <text>: a favicon is drawn without the page's @font-face
+       rules, and almost no system serif covers the Coptic block, so a text
+       node renders as a tofu box on the machines that matter most. -->
   <style>
     /* Solarized, following the same scheme preference as the page. */
     .bg { fill: #fdf6e3; }  /* base3  */
@@ -9,5 +13,5 @@
     }
   </style>
   <rect class="bg" width="32" height="32"/>
-  <text class="fg" x="16" y="25" font-family="serif" font-size="27" text-anchor="middle">&#11393;</text>
+  <path class="fg" d="M6.48 5 6.94 6.25H9.6Q11.23 7.75 11.98 9.42L13.1 12.21L11.4 13.46Q9.4 14.96 7.92 16.46Q6.44 17.96 5.98 19.42L5.6 20.58Q5.52 20.83 5.52 21.46Q5.52 23.67 6.9 25.33Q8.31 27 10.19 27Q12.1 27 14.02 25.96L15.9 24.71L16.65 24.21L17.31 23.62L18.1 22.96Q19.02 24.21 19.62 25Q20.23 25.79 20.56 26.12Q21.81 27 22.98 27Q24.27 27 25.23 25.88Q25.77 25.33 26.02 24.83Q26.35 24.29 26.48 23.88Q25.4 24.38 24.69 24.38Q23.23 24.38 22.48 23.04L15.56 8.96Q15.1 7.83 14.65 7.38Q14.19 6.75 13.4 6.25H16.9L16.4 5ZM11.27 25.08Q10.27 25.08 9.73 24.04Q9.23 22.92 9.23 21.92Q9.23 20.42 10.9 18.62Q11.69 17.75 12.67 16.96Q13.65 16.17 14.65 15.54L17.4 21.62L15.23 23.38L14.15 24.21L13.6 24.5Q12.52 25.08 11.27 25.08Z"/>
 </svg>

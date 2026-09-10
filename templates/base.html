@@ -6,27 +6,33 @@
 <title>{% block title %}{{ config.title }}{% endblock %}</title>
 {% if config.description %}<meta name="description" content="{% block description %}{{ config.description }}{% endblock %}">{% endif %}
 {% if config.extra.author %}<meta name="author" content="{{ config.extra.author }}">{% endif %}
-<link rel="preload" href="{{ get_url(path='fonts/newathu5_8.woff') }}" as="font" type="font/woff" crossorigin>
+{# Both of these are wanted for the first paint — the wordmark under the
+   masthead is Coptic, the line under it is not. The italic and bold are left
+   to be fetched when something on the page actually asks for them. #}
+<link rel="preload" href="{{ get_url(path='fonts/LibertinusSerif-Regular.woff2') }}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ get_url(path='fonts/CSAvvaShenoudaUnicode.ttf') }}" as="font" type="font/ttf" crossorigin>
 <link rel="stylesheet" href="{{ get_url(path='style.css', cachebust=true) }}">
 <link rel="icon" href="{{ get_url(path='favicon.svg') }}" type="image/svg+xml">
 </head>
 
 <body>
 
+{# The nav sits inside the masthead rather than under a rule of its own: name,
+   tagline and nav are one block of furniture, and bracketing each of them
+   separately spent three rules and most of the first screen on a site with
+   three pages. One rule now, between all of it and the page. #}
 <header class="masthead">
   {# aria-label: the name is not set in Latin anywhere on screen, and most
      screen reader voices cannot pronounce the Coptic glyphs. #}
   <p><a href="{{ get_url(path='@/_index.md') }}" aria-label="Atripe"><span class="wordmark copt">ⲁⲧⲣⲓⲡⲉ</span></a></p>
   {% if config.extra.subtitle %}<p class="tagline">{{ config.extra.subtitle }}</p>{% endif %}
+
+  <nav class="sitenav">
+  [ <a href="{{ get_url(path='@/_index.md') }}">Home</a>
+  | <a href="{{ get_url(path='@/links/_index.md') }}">Links</a>
+  | <a href="{{ get_url(path='@/about/_index.md') }}">About this page</a> ]
+  </nav>
 </header>
-
-<hr>
-
-<nav class="sitenav">
-[ <a href="{{ get_url(path='@/_index.md') }}">Home</a>
-| <a href="{{ get_url(path='@/links/_index.md') }}">Links</a>
-| <a href="{{ get_url(path='@/about/_index.md') }}">About this page</a> ]
-</nav>
 
 <hr>
 
