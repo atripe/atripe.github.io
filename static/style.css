@@ -10,9 +10,7 @@
    Libertinus Serif 7.051, SIL OFL 1.1 — see fonts/OFL-Libertinus.txt.
    CS Avva Shenouda Unicode 2.0, Coptic Font Standard Project — see README. */
 
-/* WOFF2: about half the bytes of the OTF it was made from, and the flake
-   unwraps it back to an OTF for the cheat sheet, so the sheet and the site
-   stay set from one committed file per face. */
+/* WOFF2, about half the bytes of the OTF it was made from. */
 @font-face {
   font-family: "Libertinus Serif";
   src: local("Libertinus Serif"),
@@ -61,7 +59,7 @@
      1em the Coptic would sit visibly short of the Latin it runs beside. 123 %
      is 647/527: it lines the two up, and it does so on the font rather than
      on a class, so unmarked Coptic in the middle of a paragraph comes out the
-     right size too. The cheat sheet uses the same ratio as a size. */
+     right size too. */
   size-adjust: 123%;
   font-weight: normal;
   font-style: normal;
