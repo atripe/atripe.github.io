@@ -46,8 +46,8 @@ content/links/_index.md   links page
 templates/                Tera templates; base.html holds the page furniture
 templates/shortcodes/     copt.html, cite.html, margin.html
 static/style.css          all of the CSS
-static/fonts/             Libertinus Serif (WOFF2), the Coptic face (TTF)
-                          + the OFL for Libertinus
+static/fonts/             Gentium (WOFF2), the Coptic face (TTF)
+                          + the OFL for Gentium
 flake.nix                 dev shell + the site derivation
 ```
 
@@ -115,22 +115,22 @@ Solarized, light or dark by `prefers-color-scheme`. No JavaScript, no
 external requests. Feeds and syntax highlighting are off — highlighting
 emits inline styles that ignore the dark mode.
 
-Two faces, one job each, both served from this origin — 650 kB in total.
+Two faces, one job each, both served from this origin.
 
-**Libertinus Serif 7.051** (SIL OFL 1.1, `fonts/OFL-Libertinus.txt`) sets the
-page. It is a maintained Linux Libertine descendant, and among faces that read
-well as body text it has the widest coverage: Latin through Ext-B, IPA,
-Cyrillic, Hebrew, and the polytonic Greek a page about Coptic reaches for on
-its first citation. Three weights as WOFF2, 590 kB.
+**Gentium 7.000** (SIL OFL 1.1, `fonts/OFL-Gentium.txt`) sets the page. SIL
+made it for linguists, so it covers Latin through Ext-B, IPA, Cyrillic, and
+the polytonic Greek a page about Coptic reaches for on its first citation.
+Three weights as WOFF2, converted from the release TTFs but not subset: the
+OFL reserves the name "Gentium" for unmodified fonts.
 
 **CS Avva Shenouda Unicode 2.0** (Coptic Font Standard Project,
 `CopticChurch.net/coptic_fonts`) sets the Coptic. It is 73 glyphs — the two
 Coptic ranges, the combining marks and a space — so it cannot set a page on
 its own, and it does not have to: its `@font-face` carries a `unicode-range`,
 which means **any Coptic character anywhere on the site is set in it**, marked
-up or not, and every other character falls through to Libertinus. Its letters
-are 527 units against Libertinus's 647-unit capitals, so `size-adjust: 123%`
-puts the two at one height on the font rather than on a class. 43 kB as TTF.
+up or not, and every other character falls through to Gentium. Its letters
+are 527 units against Gentium's 615-unit capitals, so `size-adjust: 117%`
+puts the two at one height on the font rather than on a class.
 Its own metadata carries no licence beyond a 2002 copyright line; the file
 permits embedding (`fsType` 0) and the CS fonts are distributed as freeware
 for Coptic use, but that is not the explicit grant the OFL gives.

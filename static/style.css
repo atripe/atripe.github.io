@@ -1,38 +1,38 @@
 /* Solarized, light or dark per prefers-color-scheme.
 
-   Two faces, and between them one job each. Libertinus Serif sets the page —
-   a Linux Libertine descendant, still maintained, and the widest coverage of
-   anything that also reads well as body text: Latin to Ext-B, IPA, Cyrillic,
-   Hebrew, and polytonic Greek, which a page about Coptic will reach for on
-   the first citation. CS Avva Shenouda Unicode sets the Coptic, and only the
-   Coptic — see its unicode-range below.
+   Two faces, and between them one job each. Gentium sets the page — SIL's
+   face for linguists, open and sturdy on screen, covering Latin to Ext-B,
+   IPA, Cyrillic and the polytonic Greek a page about Coptic will reach for
+   on the first citation. CS Avva Shenouda Unicode sets the Coptic, and only
+   the Coptic — see its unicode-range below.
 
-   Libertinus Serif 7.051, SIL OFL 1.1 — see fonts/OFL-Libertinus.txt.
+   Gentium 7.000, SIL OFL 1.1 — see fonts/OFL-Gentium.txt.
    CS Avva Shenouda Unicode 2.0, Coptic Font Standard Project — see README. */
 
-/* WOFF2, about half the bytes of the OTF it was made from. */
+/* WOFF2, about half the bytes of the TTF it was made from. Not subset: the
+   OFL reserves the name "Gentium" for unmodified files. */
 @font-face {
-  font-family: "Libertinus Serif";
-  src: local("Libertinus Serif"),
-       url("fonts/LibertinusSerif-Regular.woff2") format("woff2");
+  font-family: "Gentium";
+  src: local("Gentium"),
+       url("fonts/Gentium-Regular.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Libertinus Serif";
-  src: local("Libertinus Serif Italic"),
-       url("fonts/LibertinusSerif-Italic.woff2") format("woff2");
+  font-family: "Gentium";
+  src: local("Gentium Italic"),
+       url("fonts/Gentium-Italic.woff2") format("woff2");
   font-weight: normal;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Libertinus Serif";
-  src: local("Libertinus Serif Bold"),
-       url("fonts/LibertinusSerif-Bold.woff2") format("woff2");
+  font-family: "Gentium";
+  src: local("Gentium Bold"),
+       url("fonts/Gentium-Bold.woff2") format("woff2");
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -42,10 +42,10 @@
    glyphs, no Latin, no digits, no punctuation. The unicode-range is therefore
    what makes it usable: the face heads --serif, so every Coptic character on
    the site is set in it whether or not anyone remembered to reach for .copt,
-   while every other character falls straight through to Libertinus.
+   while every other character falls straight through to Gentium.
 
    The range is the font's cmap exactly, less U+0020. Its space is in the file
-   at 278 units against Libertinus's 250, and claiming it would reset the word
+   at 278 units against Gentium's 220, and claiming it would reset the word
    spacing of all the English on the site to suit one alphabet. The combining
    marks are kept: U+0305 superlineation above all, but also the trema and the
    dots below, which belong to the Coptic here rather than to the Greek. */
@@ -55,12 +55,12 @@
        url("fonts/CSAvvaShenoudaUnicode.ttf") format("truetype");
   unicode-range: U+0300, U+0305, U+0307-0308, U+0323, U+0331,
                  U+03E2-03EF, U+2C80-2CB1, U+2CC8-2CC9;
-  /* Its letters are 527 units tall and Libertinus's capitals 647, so at plain
-     1em the Coptic would sit visibly short of the Latin it runs beside. 123 %
-     is 647/527: it lines the two up, and it does so on the font rather than
+  /* Its letters are 527 units tall and Gentium's capitals 615, so at plain
+     1em the Coptic would sit visibly short of the Latin it runs beside. 117 %
+     is 615/527: it lines the two up, and it does so on the font rather than
      on a class, so unmarked Coptic in the middle of a paragraph comes out the
      right size too. */
-  size-adjust: 123%;
+  size-adjust: 117%;
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -88,7 +88,7 @@
   /* rem, not em: margin notes set their own font-size, and em would resolve
      these against it — leaving the notes narrower than the apron reserved
      for them on body. */
-  /* 34rem is 544px, and Libertinus at the 18px body size below averages
+  /* 34rem is 544px, and Gentium at the 18px body size below averages
      7.5px a character, so a full line runs about 72 characters — inside the
      60-75 a reader's eye can return along without losing the next line. The
      old 40rem was 96 characters, which is a measure for a footnote, not for
@@ -98,14 +98,14 @@
   --apron-gap: 3rem;
 
   /* The Coptic face first, but its unicode-range holds it to the Coptic, so
-     this is still Libertinus's stack for everything else. */
-  --serif: "CS Avva Shenouda Unicode", "Libertinus Serif",
-           "Linux Libertine O", "Times New Roman", Times, serif;
+     this is still Gentium's stack for everything else. */
+  --serif: "CS Avva Shenouda Unicode", "Gentium", "Gentium Plus",
+           "Times New Roman", Times, serif;
   --mono: "Courier New", Courier, monospace;
   /* Fallbacks for when the webfont is blocked: anything covering U+2C80. */
   --copt: "CS Avva Shenouda Unicode", "New Athena Unicode", "Antinoou",
           "Noto Sans Coptic", "Segoe UI Historic", "Sophia Nubian",
-          "FreeSerif", serif;  /* Libertinus has no Coptic; these do. */
+          "FreeSerif", serif;  /* in case the webfonts are blocked. */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -126,22 +126,19 @@ body {
   background-color: var(--bg);
   color: var(--fg);
   font-family: var(--serif);
-  /* 18px, not the browser's 16. Libertinus has a small x-height — 431 units
-     against a 647 cap — so it sets smaller than its nominal size suggests,
-     the way the metal faces it descends from did. */
+  /* 18px, not the browser's 16: the measure below is reckoned at this size,
+     and at 16 the same 34rem would run past 80 characters. */
   font-size: 1.125rem;
   line-height: 1.5;
-  /* Libertinus carries proper oldstyle figures, and in a serif text face they
+  /* Gentium carries proper oldstyle figures, and in a serif text face they
      are what belongs in running prose: they have ascenders and descenders and
      so sit in a line of lowercase instead of standing up out of it like small
      capitals. Lining figures are put back below wherever digits need to line
      up in columns instead — tables, code, the margin's note numbers. */
   font-variant-numeric: oldstyle-nums;
-  /* The face has kerning and both common and discretionary ligature sets; the
-     first two are what a book gets and the third is not, so name them rather
-     than leaving them to a browser default that varies at small sizes. */
+  /* named rather than left to a browser default that varies at small sizes. */
   font-kerning: normal;
-  font-variant-ligatures: common-ligatures contextual;
+  font-variant-ligatures: common-ligatures;
   counter-reset: sidenote;
 }
 
@@ -233,7 +230,7 @@ dt > a:focus-visible,
 .masthead a:active { color: var(--fg-strong); text-decoration: underline; }
 
 /* 1.75, not the 1.1 a display line usually wants: this face descends 425
-   units and is scaled a further 123 %, so its ink is 1.73em tall and ⲣ's tail
+   units and is scaled a further 117 %, so its ink is 1.65em tall and ⲣ's tail
    in ⲁⲧⲣⲓⲡⲉ hangs straight through the tagline at anything tighter. */
 .wordmark { font-size: 3em; line-height: 1.75; }
 
@@ -273,6 +270,15 @@ blockquote {
 dd { margin: 0 0 0.7em 2em; }
 
 .meta { font-size: 0.9em; }
+
+/* two columns, so "next" stays on the right even when there is no "previous". */
+.pagenav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2em;
+}
+.pagenav p { margin: 0; }
+.pagenav .next { grid-column: 2; text-align: right; }
 
 
 /* --- code and tables -------------------------------------------------- */
@@ -440,6 +446,7 @@ figure.thumb img { max-width: 8em; }
      repository link belong to the site rather than to the text. The rules
      went with them; on paper the space does that work. */
   .sitenav,
+  .pagenav,
   .pagefoot,
   hr { display: none; }
 

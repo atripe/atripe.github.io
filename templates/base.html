@@ -9,7 +9,7 @@
 {# Both of these are wanted for the first paint — the wordmark under the
    masthead is Coptic, the line under it is not. The italic and bold are left
    to be fetched when something on the page actually asks for them. #}
-<link rel="preload" href="{{ get_url(path='fonts/LibertinusSerif-Regular.woff2') }}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ get_url(path='fonts/Gentium-Regular.woff2') }}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{{ get_url(path='fonts/CSAvvaShenoudaUnicode.ttf') }}" as="font" type="font/ttf" crossorigin>
 <link rel="stylesheet" href="{{ get_url(path='style.css', cachebust=true) }}">
 <link rel="icon" href="{{ get_url(path='favicon.svg') }}" type="image/svg+xml">
@@ -28,9 +28,9 @@
   {% if config.extra.subtitle %}<p class="tagline">{{ config.extra.subtitle }}</p>{% endif %}
 
   <nav class="sitenav">
-  [ <a href="{{ get_url(path='@/_index.md') }}">Home</a>
-  | <a href="{{ get_url(path='@/links/_index.md') }}">Links</a>
-  | <a href="{{ get_url(path='@/about/_index.md') }}">About this page</a> ]
+  <a href="{{ get_url(path='@/_index.md') }}">Home</a>
+  &middot; <a href="{{ get_url(path='@/links/_index.md') }}">Links</a>
+  &middot; <a href="{{ get_url(path='@/about/_index.md') }}">About this page</a>
   </nav>
 </header>
 
@@ -39,6 +39,9 @@
 <main>
 {% block content %}{% endblock %}
 </main>
+
+{# outside main so it can span the apron too. #}
+{% block aftermain %}{% endblock %}
 
 <hr>
 

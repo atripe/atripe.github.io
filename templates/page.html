@@ -14,13 +14,25 @@
 {% endif %}
 
 {{ page.content | safe }}
+{% endblock %}
 
+{% block aftermain %}
 {# Projects are ordered by weight, so there is no "newer" or "older" — just
-   the neighbours on either side. Only render what exists. #}
+   the neighbours on either side, each named and described so the link says
+   where it goes. #}
 {% if page.lower or page.higher %}
-<p class="meta">
-[ {% if page.lower %}<a href="{{ page.lower.permalink }}">{{ page.lower.title }}</a>{% endif %}{% if page.lower and page.higher %}
-| {% endif %}{% if page.higher %}<a href="{{ page.higher.permalink }}">{{ page.higher.title }}</a>{% endif %} ]
-</p>
+<hr>
+<nav class="pagenav">
+  {% if page.lower %}<p class="prev">
+    <span class="meta">← Previous</span><br>
+    <a href="{{ page.lower.permalink }}">{{ page.lower.title }}</a>
+    {% if page.lower.description %}<br><span class="meta">{{ page.lower.description }}</span>{% endif %}
+  </p>{% endif %}
+  {% if page.higher %}<p class="next">
+    <span class="meta">Next →</span><br>
+    <a href="{{ page.higher.permalink }}">{{ page.higher.title }}</a>
+    {% if page.higher.description %}<br><span class="meta">{{ page.higher.description }}</span>{% endif %}
+  </p>{% endif %}
+</nav>
 {% endif %}
 {% endblock %}
