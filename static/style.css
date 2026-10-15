@@ -78,7 +78,6 @@
 
   /* Accents are identical in both schemes, by Solarized's design. */
   --link:       #268bd2;  /* blue   */
-  --visited:    #6c71c4;  /* violet */
   --active:     #cb4b16;  /* orange */
   --accent:     #dc322f;  /* red    */
 
@@ -176,9 +175,12 @@ h1, h2, h3, h4, .wordmark, .tagline { text-wrap: balance; }
 
 /* --- links ---------------------------------------------------------- */
 
-a:link    { color: var(--link); }
-a:visited { color: var(--visited); }
+/* grey like the headings: blue on the cream is loud, and the underline
+   already marks a link in running text. the colour comes on hover. */
+a:link,
+a:visited { color: var(--fg-strong); }
 a:hover,
+a:focus-visible { color: var(--link); }
 a:active  { color: var(--active); }
 
 /* The default underline sits on the baseline and cuts through every
@@ -261,12 +263,16 @@ hr {
   background-color: var(--rule);
 }
 
+/* no right margin: the browser's default 40px would also pull a margin
+   note cited inside the quote that far in from the apron. */
 blockquote {
   margin-left: 2em;
+  margin-right: 0;
   padding-left: 1em;
   border-left: 2px solid var(--border);
 }
 
+dt { font-weight: bold; }
 dd { margin: 0 0 0.7em 2em; }
 
 .meta { font-size: 0.9em; }
@@ -428,7 +434,6 @@ figure.thumb img { max-width: 8em; }
     --rule: #000;
     --border: #000;
     --link: #000;
-    --visited: #000;
     --active: #000;
   }
 
