@@ -371,6 +371,9 @@ figure.thumb img { max-width: 8em; }
   color: var(--link);
 }
 
+/* a key cite could not find, loud enough to catch in a preview. */
+.sidenote .unknown { color: var(--accent); }
+
 .sidenote::before {
   content: counter(sidenote) " ";
   font-variant-numeric: lining-nums;

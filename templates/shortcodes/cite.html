@@ -1,1 +1,26 @@
+{%- if key -%}
+{%- if page %}{% set here = page %}{% else %}{% set here = section %}{% endif -%}
+{%- set dir = here.relative_path | split(pat="/") | slice(end=-1) | join(sep="/") -%}
+{#- rendered from references.bib by bib/render.lua, so editing the text needs no rerun. -#}
+{%- set refs = load_data(path="content/" ~ dir ~ "/references.json", required=false) -%}
+{%- if loc %}{% set l = loc ~ "" %}{% else %}{% set l = "" %}{% endif -%}
+{#- a work already cited further up the page gets the short note. a shortcode
+    cannot see its siblings, so read the page source up to this call. -#}
+{%- set source = load_data(path="content/" ~ here.relative_path, format="plain") -%}
+{%- set dq = '"' ~ key ~ '"' -%}{%- set sq = "'" ~ key ~ "'" -%}
+{%- set seen = false -%}
+{%- for call in source | split(pat="cite(") | slice(start=1, end=nth) -%}
+{%- set args = call | split(pat=")") | first -%}
+{%- if args is containing(dq) or args is containing(sq) %}{% set_global seen = true %}{% endif -%}
+{%- endfor -%}
+{%- if refs and key in refs -%}
+{%- set note = refs[key] -%}
+{%- if seen and l %}{% set t = note.short_loc | replace(from="{loc}", to=l | escape) -%}
+{%- elif seen %}{% set t = note.short -%}
+{%- elif l %}{% set t = note.full_loc | replace(from="{loc}", to=l | escape) -%}
+{%- else %}{% set t = note.full %}{% endif -%}
+{%- else -%}
+{%- set t = '<span class="unknown" title="not in references.bib, or bib/render.lua has not run since it was added">' ~ key ~ '?</span>' -%}
+{%- endif -%}
+{%- endif -%}
 <span class="noteref"></span><span class="sidenote">{{ t | safe }}</span>

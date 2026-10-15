@@ -45,6 +45,8 @@ content/about/_index.md   about page
 content/links/_index.md   links page
 templates/                Tera templates; base.html holds the page furniture
 templates/shortcodes/     copt.html, cite.html, margin.html
+bib/                      the CSL style, and render.lua, which renders each
+                          references.bib into the references.json beside it
 static/style.css          all of the CSS
 static/fonts/             Gentium (WOFF2), the Coptic face (TTF)
                           + the OFL for Gentium
@@ -80,6 +82,7 @@ Projects have no dates and no tags; `weight` sets the order.
 
 ```
 {{/* copt(t="ⲃ ⲗ ⲙ ⲛ ⲣ") */}}                     Coptic, with the fallbacks
+{{/* cite(key="Crum1939", loc="168a") */}}             from references.bib
 {{/* cite(t="Crum, <em>A Coptic Dictionary</em> (Oxford, 1939), 168a.") */}}
 {{/* margin(t="An aside, unnumbered.") */}}
 ```
@@ -89,8 +92,23 @@ pasted straight into a paragraph is already set in it. The shortcode adds the
 list of installed Coptic fonts to fall back to when the webfont does not load.
 
 `cite` puts a superscript marker in the text and the reference in the right
-margin. Numbering is a CSS counter, so inserting one mid-draft renumbers the
-rest for free. `margin` is the same thing without a number. Both take HTML
+margin. With `key` the reference comes from the `references.bib` beside the
+article, which needs to be a page bundle; `loc` is the page or other locator.
+With `t` the note is typed out by hand.
+
+Zola has no citation engine, so `pandoc lua bib/render.lua` runs every entry
+of each `references.bib` through pandoc's citeproc, in the CSL style in
+`bib/`, and writes `references.json` beside it: the full note and the short
+one, each with a slot for the locator. The article text is not an input, so
+editing it never needs a rerun; only changing the `.bib` does, and `zola
+serve` will not do that for you. The shortcode reads the page source up to
+itself to tell a first citation of a work from a later one, which gets the
+short form. Because the locator goes into a slot rather than through
+citeproc, it is printed as written: "§ 3", not citeproc's "sec. 3". A key
+that is not in `references.json` is set in red with a question mark.
+
+Numbering is a CSS counter, so inserting one mid-draft renumbers the rest for
+free. `margin` is the same thing as `cite` without a number. Both take HTML
 in `t`, which is how you get italics into a title.
 
 A figure goes in the margin by carrying the class directly:

@@ -20,17 +20,27 @@
           pname = "atripe";
           version = "0.1.0";
           src = ./.;
-          nativeBuildInputs = [ pkgs.zola ];
-          buildPhase = "zola build --output-dir $out";
+          nativeBuildInputs = [
+            pkgs.pandoc
+            pkgs.zola
+          ];
+          buildPhase = ''
+            pandoc lua bib/render.lua
+            zola build --output-dir $out
+          '';
           dontInstall = true;
         };
       });
 
       devShells = forAllSystems (pkgs: {
         default = pkgs.mkShellNoCC {
-          packages = [ pkgs.zola ];
+          packages = [
+            pkgs.pandoc
+            pkgs.zola
+          ];
           shellHook = ''
             echo "atripe — 'zola serve' to preview (no --base-url, it breaks the CSS)"
+            echo "         'pandoc lua bib/render.lua' after changing a references.bib"
           '';
         };
       });
